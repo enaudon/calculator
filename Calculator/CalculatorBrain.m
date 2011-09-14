@@ -11,33 +11,65 @@
 
 @implementation CalculatorBrain
 
-- (void) performWaitingOperation {
+/*Attempts to perform 2-operand operations.
+ *If only one operand has been specified, nothing is done.
+ *Also, note that the result of the calculation is stored
+ *in the operand variable.
+ *This method is private.
+ */
+- (void) performWaitingOperation
+{    
+    //handle addition
     if ([waitingOperation isEqual:@"+"])
-        operand = waitingOperand + operand;
+        operand2 = operand1 + operand2;
+    
+    //handle subtraction
     else if ([waitingOperation isEqual:@"-"])
-        operand = waitingOperand - operand;
+        operand2 = operand1 - operand2;
+    
+    //handle multiplication
     else if ([waitingOperation isEqual:@"*"])
-        operand = waitingOperand*operand;
+        operand2 = operand1*operand2;
+    
+    //handle division
+    //note: fail silently for division by zero
+    //(fix that)
     else if ([waitingOperation isEqual:@"/"])
-        if (operand)
-            operand = waitingOperand/operand;
+        if (operand2)
+            operand2 = operand1/operand2;
 }
 
-- (void) setOperand:(double)aDouble {
-    operand = aDouble;
-}
+/*Setter for the operand variable.
+ *
+ *@param operand the new value of operand.
+ */
+- (void) setOperand:(double)operand {operand2 = operand;}
 
-- (double) performOperation:(NSString *)operation {
+/*Attempts to perform the specified operation.
+ *If a 2-operand operation is requested, performWaitingOperation
+ is called.
+ *
+ *@param operation the operation to be performed
+ *@return          the result of the calculation
+ */
+- (double) performOperation:(NSString *)operation
+{    
+    //handle square root
     if ([operation isEqual:@"sqrt"])
-        operand = sqrt(operand);
+        operand2 = sqrt(operand2);
+    
+    //handle negation
+    //NOTE: this is not implemented yet!
     else if ([operation isEqual:@"+/-"])
-        operand = - operand;
+        operand2 = - operand2;
+    
+    //handle 2-operand operations
     else {
         [self performWaitingOperation];
         waitingOperation = operation;
-        waitingOperand = operand;
+        operand1 = operand2;
     }
-    return operand;
+    return operand2;
 }
 
 @end
