@@ -23,4 +23,7 @@
 //called when operation is pressed.  performs operation.
 - (IBAction) operationPressed:(UIButton *)sender;
 
+//called when clear is pressed.  clears display and vars.
+- (IBAction) clearPressed:(UIButton *)sender;
+
 @end

@@ -66,4 +66,16 @@
     [display setText:[NSString stringWithFormat:@"%g", result]];
 }
 
+/*Called when the clear button is pressed.
+ *Clears the display, operands and waitingOperation
+ *
+ *@param sender the triggering button
+ */
+- (IBAction) clearPressed:(UIButton *)sender
+{
+    [[self brain] clear];    //clear brain variables
+    [display setText:@"0"];  //zero display
+    typing = 0;              //clear typing
+}
+
 @end

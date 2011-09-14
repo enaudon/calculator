@@ -11,6 +11,15 @@
 
 @implementation CalculatorBrain
 
+/*Clears the operand variables and waitingOperation.
+ */
+- (void) clear
+{
+    operand1 = 0;
+    operand2 = 0;
+    waitingOperation = nil;
+}
+
 /*Attempts to perform 2-operand operations.
  *If only one operand has been specified, nothing is done.
  *Also, note that the result of the calculation is stored
@@ -60,8 +69,29 @@
     
     //handle negation
     //NOTE: this is not implemented yet!
-    else if ([operation isEqual:@"+/-"])
+    else if ([operation isEqual:@"(-)"])
         operand2 = - operand2;
+    
+    //handle inversion
+    //note: fail silently for division by zero
+    //(fix that)
+    else if ([operation isEqual:@"1/x"])
+        if (operand2)
+            operand2 = 1/operand2;
+        //yes, this is sloppy, i know.  i'll get to it.
+        else {}
+    
+    //handle sine
+    else if ([operation isEqual:@"sin"])
+        operand2 = sin(operand2);
+    
+    //handle cosine
+    else if ([operation isEqual:@"cos"])
+        operand2 = cos(operand2);
+    
+    //handle tangent
+    else if ([operation isEqual:@"tan"])
+        operand2 = tan(operand2);
     
     //handle 2-operand operations
     else {
