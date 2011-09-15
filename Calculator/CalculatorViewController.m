@@ -21,6 +21,18 @@
     return brain;
 }
 
+/*Called when the clear button is pressed.
+ *Clears the display, operands and waitingOperation
+ *
+ *@param sender the triggering button
+ */
+- (IBAction) clearPressed:(UIButton *)sender
+{
+    [[self brain] clear];    //clear brain variables
+    [display setText:@"0"];  //zero display
+    typing = 0;              //clear typing
+}
+
 /*Called when a digit-button is pressed.
  *Updates the display.
  *
@@ -34,12 +46,12 @@
     //display digit
     //if the user is typing, append
     if (typing)
-        [display setText:[[display text]
-                          stringByAppendingString:digit]];
+      [display setText:[[display text]
+                        stringByAppendingString:digit]];
     //otherwise, overwrite current display
     else {
-        [display setText:digit];
-        typing = 1;
+      [display setText:digit];
+      typing = 1;
     }
 }
 
@@ -53,9 +65,9 @@
 {    
     //if the user is typing, grab and store operand
     if (typing) {
-        double operand = [[display text] doubleValue];
-        [[self brain] setOperand:operand];
-        typing = 0;
+      double operand = [[display text] doubleValue];
+      [[self brain] setOperand:operand];
+      typing = 0;
     }
     
     //grab and perform operation
@@ -64,18 +76,6 @@
     
     //display result
     [display setText:[NSString stringWithFormat:@"%g", result]];
-}
-
-/*Called when the clear button is pressed.
- *Clears the display, operands and waitingOperation
- *
- *@param sender the triggering button
- */
-- (IBAction) clearPressed:(UIButton *)sender
-{
-    [[self brain] clear];    //clear brain variables
-    [display setText:@"0"];  //zero display
-    typing = 0;              //clear typing
 }
 
 @end

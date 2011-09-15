@@ -30,29 +30,29 @@
 {    
     //handle addition
     if ([waitingOperation isEqual:@"+"])
-        operand2 = operand1 + operand2;
+        operand1 = operand2 + operand1;
     
     //handle subtraction
     else if ([waitingOperation isEqual:@"-"])
-        operand2 = operand1 - operand2;
+      operand1 = operand2 - operand1;
     
     //handle multiplication
     else if ([waitingOperation isEqual:@"*"])
-        operand2 = operand1*operand2;
+      operand1 = operand2*operand1;
     
     //handle division
     //note: fail silently for division by zero
     //(fix that)
     else if ([waitingOperation isEqual:@"/"])
-        if (operand2)
-            operand2 = operand1/operand2;
+      if (operand1)
+        operand1 = operand2/operand1;
 }
 
 /*Setter for the operand variable.
  *
  *@param operand the new value of operand.
  */
-- (void) setOperand:(double)operand {operand2 = operand;}
+- (void) setOperand:(double)operand {operand1 = operand;}
 
 /*Attempts to perform the specified operation.
  *If a 2-operand operation is requested, performWaitingOperation
@@ -64,42 +64,46 @@
 - (double) performOperation:(NSString *)operation
 {    
     //handle square root
-    if ([operation isEqual:@"sqrt"])
-        operand2 = sqrt(operand2);
+    if ([operation isEqual:@"√x"])
+      operand1 = sqrt(operand1);
+    
+    //handle square
+    if ([operation isEqual:@"x²"])
+      operand1 = pow(operand1, 2);
     
     //handle negation
     //NOTE: this is not implemented yet!
     else if ([operation isEqual:@"(-)"])
-        operand2 = - operand2;
+      operand1 = - operand1;
     
     //handle inversion
     //note: fail silently for division by zero
     //(fix that)
     else if ([operation isEqual:@"1/x"])
-        if (operand2)
-            operand2 = 1/operand2;
-        //yes, this is sloppy, i know.  i'll get to it.
-        else {}
+      if (operand1)
+        operand1 = 1/operand1;
+      //yes, this is sloppy, i know.  i'll get to it.
+      else {}
     
     //handle sine
     else if ([operation isEqual:@"sin"])
-        operand2 = sin(operand2);
+      operand1 = sin(operand1);
     
     //handle cosine
     else if ([operation isEqual:@"cos"])
-        operand2 = cos(operand2);
+      operand1 = cos(operand1);
     
     //handle tangent
     else if ([operation isEqual:@"tan"])
-        operand2 = tan(operand2);
+      operand1 = tan(operand1);
     
     //handle 2-operand operations
     else {
-        [self performWaitingOperation];
-        waitingOperation = operation;
-        operand1 = operand2;
+      [self performWaitingOperation];
+      waitingOperation = operation;
+      operand2 = operand1;
     }
-    return operand2;
+    return operand1;
 }
 
 @end

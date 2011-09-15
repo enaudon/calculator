@@ -10,6 +10,7 @@
 #import "CalculatorBrain.h"
 
 @interface CalculatorViewController : UIViewController {
+  @private
     IBOutlet UILabel *display;  //calculator's display
     CalculatorBrain *brain;     //class that performs calculations
     BOOL typing;  //0 = user done specifying operand
