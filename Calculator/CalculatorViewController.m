@@ -33,6 +33,27 @@
     typing = 0;              //clear typing
 }
 
+/*Called when the store button is pressed.
+ *Stores the value of the display to the memory variable.
+ *
+ *@param sender the triggering button
+ */
+- (IBAction) storePressed:(UIButton *)sender
+{
+  [[self brain] setMemory:[[display text] doubleValue]];
+}
+
+/*Called when the recall button is pressed.
+ *Sets the display to the value in the memory variable.
+ *
+ *@param sender the triggering button
+ */
+- (IBAction) recallPressed:(UIButton *)sender
+{
+  [display setText:[NSString stringWithFormat:@"%g",
+                    [[self brain] memory]]];
+}
+
 /*Called when a digit-button is pressed.
  *Updates the display.
  *

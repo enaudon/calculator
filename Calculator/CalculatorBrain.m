@@ -11,8 +11,9 @@
 
 @implementation CalculatorBrain
 @synthesize operand1;
+@synthesize memory;
 
-/*Clears the operand variables and waitingOperation.
+/*Clears the operand variables, waitingOperation and memory.
  */
 - (void) clear
 {

@@ -15,9 +15,10 @@
     double operand2;  //second operand
     NSString *waitingOperation;  //operation storage for
                                  //2-operand operations
+    double memory;  //storage for the calculator
 }
-@property
-  double operand1;  //first operand
+@property double operand1;  //first operand
+@property double memory;  //storage for the calculator
 
 //clears operands and waitingOperation
 - (void) clear;
