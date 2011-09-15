@@ -16,12 +16,11 @@
     NSString *waitingOperation;  //operation storage for
                                  //2-operand operations
 }
+@property
+  double operand1;  //first operand
 
 //clears operands and waitingOperation
 - (void) clear;
-
-//setter for operand variable
-- (void) setOperand:(double)operand;
 
 //attempts to perform the specified operation
 - (double) performOperation:(NSString *)operation;

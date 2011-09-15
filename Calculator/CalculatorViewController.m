@@ -66,7 +66,7 @@
     //if the user is typing, grab and store operand
     if (typing) {
       double operand = [[display text] doubleValue];
-      [[self brain] setOperand:operand];
+      [[self brain] setOperand1:operand];
       typing = 0;
     }
     

@@ -10,6 +10,7 @@
 
 
 @implementation CalculatorBrain
+@synthesize operand1;
 
 /*Clears the operand variables and waitingOperation.
  */
@@ -47,12 +48,6 @@
       if (operand1)
         operand1 = operand2/operand1;
 }
-
-/*Setter for the operand variable.
- *
- *@param operand the new value of operand.
- */
-- (void) setOperand:(double)operand {operand1 = operand;}
 
 /*Attempts to perform the specified operation.
  *If a 2-operand operation is requested, performWaitingOperation
