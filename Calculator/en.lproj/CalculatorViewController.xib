@@ -542,7 +542,7 @@
 						<string key="NSFrame">{{20, 20}, {280, 37}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="152976152"/>
+						<reference key="NSNextKeyView" ref="771200520"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -584,20 +584,20 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="75525681"/>
 					</object>
-					<object class="IBUIButton" id="712485110">
+					<object class="IBUIButton" id="243363167">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{193, 160}, {50, 40}}</string>
+						<string key="NSFrame">{{77, 160}, {50, 40}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="87431797"/>
+						<reference key="NSNextKeyView" ref="152976152"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="115272072"/>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Str</string>
+						<string key="IBUINormalTitle">M+</string>
 						<reference key="IBUIHighlightedTitleColor" ref="141523616"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -626,19 +626,20 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="75525681"/>
 					</object>
-					<object class="IBUIButton" id="243363167">
+					<object class="IBUIButton" id="712485110">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{77, 160}, {50, 40}}</string>
+						<string key="NSFrame">{{193, 160}, {50, 40}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="87431797"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="115272072"/>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">M+</string>
+						<string key="IBUINormalTitle">Str</string>
 						<reference key="IBUIHighlightedTitleColor" ref="141523616"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -652,6 +653,7 @@
 						<string key="NSFrame">{{20, 160}, {49, 40}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="243363167"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -920,24 +922,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">storePressed:</string>
-						<reference key="source" ref="712485110"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">108</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">recallPressed:</string>
-						<reference key="source" ref="152976152"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">109</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">memOpPressed:</string>
 						<reference key="source" ref="243363167"/>
 						<reference key="destination" ref="372490531"/>
@@ -953,6 +937,24 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">119</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">memOpPressed:</string>
+						<reference key="source" ref="152976152"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">121</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">memOpPressed:</string>
+						<reference key="source" ref="712485110"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">123</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1005,10 +1007,10 @@
 							<reference ref="676640680"/>
 							<reference ref="683916365"/>
 							<reference ref="87431797"/>
-							<reference ref="712485110"/>
-							<reference ref="152976152"/>
 							<reference ref="243363167"/>
 							<reference ref="771200520"/>
+							<reference ref="152976152"/>
+							<reference ref="712485110"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1138,16 +1140,6 @@
 						<reference key="parent" ref="774585933"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">106</int>
-						<reference key="object" ref="712485110"/>
-						<reference key="parent" ref="774585933"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">107</int>
-						<reference key="object" ref="152976152"/>
-						<reference key="parent" ref="774585933"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">116</int>
 						<reference key="object" ref="243363167"/>
 						<reference key="parent" ref="774585933"/>
@@ -1155,6 +1147,16 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">118</int>
 						<reference key="object" ref="771200520"/>
+						<reference key="parent" ref="774585933"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">120</int>
+						<reference key="object" ref="152976152"/>
+						<reference key="parent" ref="774585933"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">122</int>
+						<reference key="object" ref="712485110"/>
 						<reference key="parent" ref="774585933"/>
 					</object>
 				</object>
@@ -1167,10 +1169,10 @@
 					<string>-2.CustomClassName</string>
 					<string>100.IBPluginDependency</string>
 					<string>102.IBPluginDependency</string>
-					<string>106.IBPluginDependency</string>
-					<string>107.IBPluginDependency</string>
 					<string>116.IBPluginDependency</string>
 					<string>118.IBPluginDependency</string>
+					<string>120.IBPluginDependency</string>
+					<string>122.IBPluginDependency</string>
 					<string>39.IBPluginDependency</string>
 					<string>49.IBPluginDependency</string>
 					<string>51.IBPluginDependency</string>
@@ -1246,7 +1248,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">119</int>
+			<int key="maxID">123</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1262,13 +1264,9 @@
 							<string>digitPressed:</string>
 							<string>memOpPressed:</string>
 							<string>operationPressed:</string>
-							<string>recallPressed:</string>
-							<string>storePressed:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIButton</string>
-							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
@@ -1283,8 +1281,6 @@
 							<string>digitPressed:</string>
 							<string>memOpPressed:</string>
 							<string>operationPressed:</string>
-							<string>recallPressed:</string>
-							<string>storePressed:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1302,14 +1298,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">operationPressed:</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">recallPressed:</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">storePressed:</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 						</object>

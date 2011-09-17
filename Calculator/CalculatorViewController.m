@@ -33,63 +33,6 @@
     typing = 0;              //clear typing
 }
 
-/*Called when the store button is pressed.
- *Stores the value of the display to the memory variable,
- *and clears the display.
- *
- *@param sender the triggering button
- */
-- (IBAction) storePressed:(UIButton *)sender
-{
-    //store display to memory
-    [[self brain] setMemory:[[display text] doubleValue]];
-    
-    [display setText:@"0"];  //zero display
-    typing = 0;              //clear typing
-}
-
-/*Called when the recall button is pressed.
- *Sets the display to the value in the memory variable.
- *
- *@param sender the triggering button
- */
-- (IBAction) recallPressed:(UIButton *)sender
-{
-    //print memory to display
-    [display setText:[NSString stringWithFormat:@"%g",
-                      [[self brain] memory]]];
-    
-    //clear typing
-    typing = 0;
-}
-
-/*Called when a memory-opertion button is pressed.
- *Performs the specified operation, stores the result in
- *the memory varible, and prints it to the display.  The
- *only two available operations are mem+ (add display to
- *memory) and mem- (subtract display from memory).
- *
- *@param sender the triggering button
- */
-- (IBAction) memOpPressed:(UIButton *)sender
-{
-    //grab and store operand, and clear typing
-    double operand = [[display text] doubleValue];
-    [[self brain] setOperand1:operand];
-    typing = 0;
-    
-    //grab and perform operation
-    NSString *operation = [[sender titleLabel] text];
-    double result = [[self brain] performMemOp:operation];
-    
-    //store result
-    [[self brain] setMemory:result];
-    
-    //display result
-    [display setText:[NSString stringWithFormat:
-                      @"%g", result]];
-}
-
 /*Called when a digit-button is pressed.
  *Updates the display.
  *
@@ -133,6 +76,30 @@
     
     //display result
     [display setText:[NSString stringWithFormat:@"%g", result]];
+}
+
+/*Called when a memory-opertion button is pressed.
+ *Performs the specified operation, stores the result in
+ *the memory varible, and prints it to the display.  The
+ *only two available operations are mem+ (add display to
+ *memory) and mem- (subtract display from memory).
+ *
+ *@param sender the triggering button
+ */
+- (IBAction) memOpPressed:(UIButton *)sender
+{
+  //grab and store operand, and clear typing
+  double operand = [[display text] doubleValue];
+  [[self brain] setOperand1:operand];
+  typing = 0;
+  
+  //grab and perform operation
+  NSString *operation = [[sender titleLabel] text];
+  double result = [[self brain] performMemOp:operation];
+  
+  //display result
+  [display setText:[NSString stringWithFormat:
+                    @"%g", result]];
 }
 
 @end

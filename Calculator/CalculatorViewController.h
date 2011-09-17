@@ -27,12 +27,6 @@
 //called when clear is pressed.  clears display and vars.
 - (IBAction) clearPressed:(UIButton *)sender;
 
-//called when store is pressed.  stores display to memory var.
-- (IBAction) storePressed:(UIButton *)sender;
-
-//called when store is pressed.  stores display to memory var.
-- (IBAction) recallPressed:(UIButton *)sender;
-
 //called when a memory-op button is pressed.  performs the operation.
 - (IBAction) memOpPressed:(UIButton *)sender;
 
