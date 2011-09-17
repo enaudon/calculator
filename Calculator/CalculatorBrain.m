@@ -22,6 +22,26 @@
     waitingOperation = nil;
 }
 
+/*Performs the specified memory operation (addition or
+ *subtraction).
+ *
+ *@param operand
+ *
+ *@return the sum of memory and  operand.
+ */
+- (double) performMemOp:(NSString *)operation
+{
+    //handle addition
+    if ([operation isEqual:@"M+"])
+      operand1 = memory + operand1;
+  
+    //handle subtraction
+    else if  ([operation isEqual:@"M-"])
+      operand1 = memory - operand1;
+    
+    return operand1;
+}
+
 /*Attempts to perform 2-operand operations.
  *If only one operand has been specified, nothing is done.
  *Also, note that the result of the calculation is stored
@@ -99,6 +119,7 @@
       waitingOperation = operation;
       operand2 = operand1;
     }
+    
     return operand1;
 }
 

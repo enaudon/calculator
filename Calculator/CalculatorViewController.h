@@ -33,4 +33,7 @@
 //called when store is pressed.  stores display to memory var.
 - (IBAction) recallPressed:(UIButton *)sender;
 
+//called when a memory-op button is pressed.  performs the operation.
+- (IBAction) memOpPressed:(UIButton *)sender;
+
 @end

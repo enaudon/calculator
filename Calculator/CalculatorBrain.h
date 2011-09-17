@@ -23,7 +23,10 @@
 //clears operands and waitingOperation
 - (void) clear;
 
-//attempts to perform the specified operation
+//returns the result of the specified memory-operation
+- (double) performMemOp:(NSString *)operation;
+
+//returns the result of the specified operation
 - (double) performOperation:(NSString *)operation;
 
 @end
