@@ -15,8 +15,12 @@
     CalculatorBrain *brain;     //class that performs calculations
     BOOL typing;  //0 = user done specifying operand
                   //1 = user specifying operand
+    BOOL real;    //0 = user has specified an integer
+                  //1 = user has specified real number
 }
 
+//called when clear is pressed.  clears display and vars.
+- (IBAction) clearPressed:(UIButton *)sender;
 
 //called when digit is pressed.  updates display.
 - (IBAction) digitPressed:(UIButton *)sender;
@@ -24,10 +28,7 @@
 //called when operation is pressed.  performs operation.
 - (IBAction) operationPressed:(UIButton *)sender;
 
-//called when clear is pressed.  clears display and vars.
-- (IBAction) clearPressed:(UIButton *)sender;
-
-//called when a memory-op button is pressed.  performs the operation.
+//called when a memory-operation is pressed.  performs the operation.
 - (IBAction) memOpPressed:(UIButton *)sender;
 
 @end

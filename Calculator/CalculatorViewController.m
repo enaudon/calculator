@@ -31,6 +31,7 @@
     [[self brain] clear];    //clear brain variables
     [display setText:@"0"];  //zero display
     typing = 0;              //clear typing
+    real = 0;                //clear real
 }
 
 /*Called when a digit-button is pressed.
@@ -42,6 +43,12 @@
 {
     //grab digit
     NSString *digit = [[sender titleLabel] text];
+  
+    //remember when the user enters a decimal point,
+    //and prevent more than one decimal point
+    if ([digit isEqual:@"."])
+      if      (!real) real = 1;
+      else if (real)  return;
     
     //display digit
     //if the user is typing, append
@@ -64,10 +71,12 @@
 - (IBAction) operationPressed:(UIButton *)sender
 {    
     //if the user is typing, grab and store operand
+    //and clear real
     if (typing) {
       double operand = [[display text] doubleValue];
       [[self brain] setOperand1:operand];
       typing = 0;
+      real = 0;
     }
     
     //grab and perform operation
@@ -88,18 +97,19 @@
  */
 - (IBAction) memOpPressed:(UIButton *)sender
 {
-  //grab and store operand, and clear typing
-  double operand = [[display text] doubleValue];
-  [[self brain] setOperand1:operand];
-  typing = 0;
+    //grab and store operand, and clear typing and real
+    double operand = [[display text] doubleValue];
+    [[self brain] setOperand1:operand];
+    typing = 0;
+    real = 0;
   
-  //grab and perform operation
-  NSString *operation = [[sender titleLabel] text];
-  double result = [[self brain] performMemOp:operation];
+    //grab and perform operation
+    NSString *operation = [[sender titleLabel] text];
+    double result = [[self brain] performMemOp:operation];
   
-  //display result
-  [display setText:[NSString stringWithFormat:
-                    @"%g", result]];
+    //display result
+    [display setText:[NSString stringWithFormat:
+                      @"%g", result]];
 }
 
 @end

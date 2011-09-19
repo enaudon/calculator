@@ -64,7 +64,7 @@
       operand1 = sqrt(operand1);
     
     //handle square
-    if ([operation isEqual:@"x²"])
+    else if ([operation isEqual:@"x²"])
       operand1 = pow(operand1, 2);
     
     //handle negation
@@ -115,6 +115,7 @@
   //handle storage
   if ([operation isEqual:@"Str"])
     memory = operand1;
+  
   //handle addition
   else if ([operation isEqual:@"M+"])
     memory = memory + operand1;
