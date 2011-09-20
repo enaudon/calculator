@@ -1,9 +1,23 @@
-//
+/*
+ *Program Name : Calculator
+ *Version      : 2.0
+ *Institution  : Bowdoin College
+ *Developer    : Enrique Naudon
+ *Date Created : 09/13/11
+ *Last Updated : 09/19/11
+ *Description  : This is an Objective-C calculator app written for the 3rd
+ *               generation iPhone's iOS platform.  Upon execution, 
+ *               Calculator presents the user with a fairly standard
+ *               calculator interface.  The user interacts with Calculator
+ *               by pressing the various digit and operation buttons as one
+ *               would on a normal calculator.   
+ */
+
 //  main.m
 //  Calculator
 //
 //  Created by Enrique S. Naudon on 9/13/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Bowdoin College. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

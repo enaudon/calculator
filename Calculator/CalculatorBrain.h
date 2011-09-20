@@ -3,8 +3,7 @@
 //  Calculator
 //
 //  Created by Enrique S. Naudon on 9/13/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+//  Copyright 2011 Bowdoin College. All rights reserved.
 
 #import <Foundation/Foundation.h>
 
