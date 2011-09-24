@@ -9,8 +9,8 @@
 
 
 @implementation CalculatorBrain
-@synthesize operand1;
-@synthesize memory;
+  @synthesize operand1;
+  @synthesize waitingOperation;
 
 /*Clears the operand variables, waitingOperation and memory.
  */
@@ -95,7 +95,7 @@
     //handle 2-operand operations
     else {
       [self performWaitingOperation];
-      waitingOperation = operation;
+      self.waitingOperation = operation;
       operand2 = operand1;
     }
     
@@ -131,7 +131,7 @@
 - (void) dealloc
 {
   //release instance variables
-  waitingOperation = nil;
+  self.waitingOperation = nil;
   
   //call super-class' destructor
   [super dealloc];

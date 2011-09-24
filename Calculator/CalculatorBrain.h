@@ -9,15 +9,19 @@
 
 
 @interface CalculatorBrain : NSObject {
-  @private
+  @public
     double operand1;  //first operand
+  @private
     double operand2;  //second operand
     NSString *waitingOperation;  //operation storage for
                                  //2-operand operations
     double memory;  //storage for the calculator
 }
-@property double operand1;  //first operand
-@property double memory;  //storage for the calculator
+//public properties
+@property double operand1;
+
+//private properties
+@property (retain) NSString *waitingOperation;
 
 //clears operands and waitingOperation
 - (void) clear;
