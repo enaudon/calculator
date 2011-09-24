@@ -126,4 +126,15 @@
   return memory;
 }
 
+/*Destructor.
+ */
+- (void) dealloc
+{
+  //release instance variables
+  waitingOperation = nil;
+  
+  //call super-class' destructor
+  [super dealloc];
+}
+
 @end

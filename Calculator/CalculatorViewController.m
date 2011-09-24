@@ -111,4 +111,16 @@
                       @"%g", result]];
 }
 
+/*Destructor.
+ */
+- (void) dealloc
+{
+  //release instance variables
+  [display release];
+  [brain   release];
+  
+  //call super-class' destructor
+  [super dealloc];
+}
+
 @end
