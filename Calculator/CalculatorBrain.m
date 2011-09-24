@@ -18,7 +18,7 @@
 {
     operand1 = 0;
     operand2 = 0;
-    waitingOperation = nil;
+    self.waitingOperation = nil;
 }
 
 /*Attempts to perform 2-operand operations.
@@ -131,7 +131,7 @@
 - (void) dealloc
 {
   //release instance variables
-  self.waitingOperation = nil;
+  [waitingOperation release];
   
   //call super-class' destructor
   [super dealloc];

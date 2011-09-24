@@ -23,6 +23,7 @@
 //private properties
 @property (retain) NSString *waitingOperation;
 
+
 //clears operands and waitingOperation
 - (void) clear;
 

@@ -8,6 +8,7 @@
 #import "CalculatorViewController.h"
 
 @implementation CalculatorViewController
+  @synthesize brain, display;
 
 /*Supplies the calculator brain object.
  *Only allows one to be created.
@@ -27,10 +28,10 @@
  */
 - (IBAction) clearPressed:(UIButton *)sender
 {
-    [[self brain] clear];    //clear brain variables
-    [display setText:@"0"];  //zero display
-    typing = 0;              //clear typing
-    real = 0;                //clear real
+    [self.brain clear];  //clear brain variables
+    [self.display setText:@"0"];  //zero display
+    typing = 0;          //clear typing
+    real = 0;            //clear real
 }
 
 /*Called when a digit-button is pressed.
@@ -52,11 +53,11 @@
     //display digit
     //if the user is typing, append
     if (typing)
-      [display setText:[[display text]
-                        stringByAppendingString:digit]];
+      [self.display setText:[[self.display text]
+                             stringByAppendingString:digit]];
     //otherwise, overwrite current display
     else {
-      [display setText:digit];
+      [self.display setText:digit];
       typing = 1;
     }
 }
@@ -72,18 +73,18 @@
     //if the user is typing, grab and store operand
     //and clear real
     if (typing) {
-      double operand = [[display text] doubleValue];
-      [[self brain] setOperand1:operand];
+      double operand = [[self.display text] doubleValue];
+      self.brain.operand1 = operand;
       typing = 0;
       real = 0;
     }
     
     //grab and perform operation
     NSString *operation = [[sender titleLabel] text];
-    double result = [[self brain] performOperation:operation];
+    double result = [self.brain performOperation:operation];
     
     //display result
-    [display setText:[NSString stringWithFormat:@"%g", result]];
+    [self.display setText:[NSString stringWithFormat:@"%g", result]];
 }
 
 /*Called when a memory-opertion button is pressed.
@@ -97,18 +98,18 @@
 - (IBAction) memOpPressed:(UIButton *)sender
 {
     //grab and store operand, and clear typing and real
-    double operand = [[display text] doubleValue];
-    [[self brain] setOperand1:operand];
+    double operand = [[self.display text] doubleValue];
+    [self.brain setOperand1:operand];
     typing = 0;
     real = 0;
   
     //grab and perform operation
     NSString *operation = [[sender titleLabel] text];
-    double result = [[self brain] performMemOp:operation];
+    double result = [self.brain performMemOp:operation];
   
     //display result
-    [display setText:[NSString stringWithFormat:
-                      @"%g", result]];
+    [self.display setText:[NSString stringWithFormat:
+                           @"%g", result]];
 }
 
 /*Destructor.

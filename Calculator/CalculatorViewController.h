@@ -9,14 +9,18 @@
 #import "CalculatorBrain.h"
 
 @interface CalculatorViewController : UIViewController {
-  @private
-    IBOutlet UILabel *display;  //calculator's display
+@private
     CalculatorBrain *brain;     //class that performs calculations
+    IBOutlet UILabel *display;  //calculator's display
     BOOL typing;  //0 = user done specifying operand
                   //1 = user specifying operand
     BOOL real;    //0 = user has specified an integer
                   //1 = user has specified real number
 }
+//private properties
+@property (retain, nonatomic) CalculatorBrain  *brain;
+@property (retain)            IBOutlet UILabel *display;
+
 
 //called when clear is pressed.  clears display and vars.
 - (IBAction) clearPressed:(UIButton *)sender;
