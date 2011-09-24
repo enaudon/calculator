@@ -10,17 +10,6 @@
 @implementation CalculatorViewController
   @synthesize brain, display;
 
-/*Supplies the calculator brain object.
- *Only allows one to be created.
- *
- *@return a pointer to our calculator brain object
- */
-- (CalculatorBrain *) brain
-{
-    if (!brain) brain = [[CalculatorBrain alloc] init];
-    return brain;
-}
-
 /*Called when the clear button is pressed.
  *Clears the display, operands and waitingOperation
  *
@@ -74,7 +63,7 @@
     //and clear real
     if (typing) {
       double operand = [[self.display text] doubleValue];
-      self.brain.operand1 = operand;
+      self.brain.operand = operand;
       typing = 0;
       real = 0;
     }
@@ -87,29 +76,15 @@
     [self.display setText:[NSString stringWithFormat:@"%g", result]];
 }
 
-/*Called when a memory-opertion button is pressed.
- *Performs the specified operation, stores the result in
- *the memory varible, and prints it to the display.  The
- *only two available operations are mem+ (add display to
- *memory) and mem- (subtract display from memory).
+/*Supplies the calculator brain object.
+ *Only allows one to be created.
  *
- *@param sender the triggering button
+ *@return a pointer to our calculator brain object
  */
-- (IBAction) memOpPressed:(UIButton *)sender
+- (CalculatorBrain *) brain
 {
-    //grab and store operand, and clear typing and real
-    double operand = [[self.display text] doubleValue];
-    [self.brain setOperand1:operand];
-    typing = 0;
-    real = 0;
-  
-    //grab and perform operation
-    NSString *operation = [[sender titleLabel] text];
-    double result = [self.brain performMemOp:operation];
-  
-    //display result
-    [self.display setText:[NSString stringWithFormat:
-                           @"%g", result]];
+  if (!brain) brain = [[CalculatorBrain alloc] init];
+  return brain;
 }
 
 /*Destructor.

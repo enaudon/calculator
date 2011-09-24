@@ -18,7 +18,7 @@
     double memory;  //storage for the calculator
 }
 //public properties
-@property double operand1;
+@property double operand;
 
 //private properties
 @property (retain) NSString *waitingOperation;
@@ -29,8 +29,5 @@
 
 //returns the result of the specified operation
 - (double) performOperation:(NSString *)operation;
-
-//returns the result of the specified memory-operation
-- (double) performMemOp:(NSString *)operation;
 
 @end

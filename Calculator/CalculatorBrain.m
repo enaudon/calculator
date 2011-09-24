@@ -9,7 +9,7 @@
 
 
 @implementation CalculatorBrain
-  @synthesize operand1;
+  @synthesize operand = operand1;
   @synthesize waitingOperation;
 
 /*Clears the operand variables, waitingOperation and memory.
@@ -91,6 +91,26 @@
     //handle tangent
     else if ([operation isEqual:@"tan"])
       operand1 = tan(operand1);
+  
+    //handle storage
+      else if ([operation isEqual:@"Str"])
+        memory = operand1;
+  
+    //handle recall
+      else if ([operation isEqual:@"Rcl"])
+        operand1 = memory;
+    
+    //handle addition
+      else if ([operation isEqual:@"M+"]) {
+        operand1 = memory + operand1;
+        memory = operand1;
+      }
+    
+    //handle subtraction
+      else if  ([operation isEqual:@"M-"]) {
+        operand1 = memory - operand1;
+        memory = operand1;
+      }
     
     //handle 2-operand operations
     else {
@@ -100,30 +120,6 @@
     }
     
     return operand1;
-}
-
-/*Performs the specified memory operation (addition or
- *subtraction) and store it to the memory variable.
- *
- *@param operand
- *
- *@return the sum of memory and  operand.
- */
-- (double) performMemOp:(NSString *)operation
-{
-  //handle storage
-  if ([operation isEqual:@"Str"])
-    memory = operand1;
-  
-  //handle addition
-  else if ([operation isEqual:@"M+"])
-    memory = memory + operand1;
-  
-  //handle subtraction
-  else if  ([operation isEqual:@"M-"])
-    memory = memory - operand1;
-  
-  return memory;
 }
 
 /*Destructor.

@@ -31,7 +31,4 @@
 //called when operation is pressed.  performs operation.
 - (IBAction) operationPressed:(UIButton *)sender;
 
-//called when a memory-operation is pressed.  performs the operation.
-- (IBAction) memOpPressed:(UIButton *)sender;
-
 @end
