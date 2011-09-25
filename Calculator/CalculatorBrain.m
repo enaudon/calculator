@@ -30,7 +30,7 @@
     //handle operands
     if ([term isKindOfClass:[NSNumber class]])
       description = [description stringByAppendingFormat:
-                    @"%s ", [term stringValue]];
+                    @"%@ ", [term stringValue]];
     
     //handle string elements
     else if ([term isKindOfClass:[NSString class]])

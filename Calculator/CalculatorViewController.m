@@ -33,9 +33,10 @@
 - (IBAction) clearPressed:(UIButton *)sender
 {
   [self.brain clear];  //clear brain variables
-  [self.display setText:@"0"];  //zero display
   typing = 0;          //clear typing
   real = 0;            //clear real
+  expr = 0;            //clear expression
+  [self.display setText:@"0"];  //zero display
 }
 
 /*Called when a digit-button is pressed.
@@ -88,7 +89,12 @@
   double result = [self.brain performOperation:operation];
   
   //display result
-  [self.display setText:[NSString stringWithFormat:@"%g", result]];
+  if (expr)
+    [self.display setText:[CalculatorBrain descriptionOfExpression:
+                           self.brain.expression]];
+  else
+    [self.display setText:[NSString stringWithFormat:@"%g", result]];
+    
 }
 
 /*Called when a variable-button is pressed.
@@ -98,6 +104,7 @@
  */
 - (IBAction) variablePressed:(UIButton *)sender
 {
+  expr = 1;
   [self.brain setVariableAsOperand:[[sender titleLabel] text]];
 }
 
@@ -113,6 +120,7 @@
  */
 - (IBAction) evaluateBrainsExpression
 {
+  expr = 0;
   NSDictionary *vars = [NSDictionary dictionaryWithObjectsAndKeys:
                         [NSNumber numberWithInt:0x61], @"a",
                         [NSNumber numberWithInt:0x62], @"b",

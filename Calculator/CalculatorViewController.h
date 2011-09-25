@@ -16,6 +16,8 @@
                 //1 = user specifying operand
   BOOL real;    //0 = user has specified an integer
                 //1 = user has specified real number
+  BOOL expr;    //0 = user is not typing an expression
+                //1 = user is typing an expression
 }
 //private properties
 @property (retain, nonatomic) CalculatorBrain  *brain;
