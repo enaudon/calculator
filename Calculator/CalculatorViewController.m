@@ -59,7 +59,7 @@
   //if the user is typing, append
   if (typing)
     [self.display setText:[[self.display text]
-                            stringByAppendingString:digit]];
+                           stringByAppendingString:digit]];
   //otherwise, overwrite current display
   else {
     [self.display setText:digit];

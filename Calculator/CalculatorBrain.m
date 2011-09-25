@@ -111,7 +111,7 @@
   
   //release brain, and autorealease/return varSet
   [brain release];
-  return varSet ? varSet : nil;
+  return [varSet anyObject] ? varSet : nil;
 }
 
 
