@@ -14,48 +14,6 @@
 @synthesize waitingOperation;
 @synthesize operand = operand1, expression = internalExpression;
 
-//-----------------------------
-/*ASSIGNMENT 3 STUFF FOLLOWS*/
-//-----------------------------
-
-+ (NSString *)descriptionOfExpression:(id)expression
-{
-  //create a brain to perform instance methods and an NSString to hold the
-  //the expression
-  CalculatorBrain *brain = [[CalculatorBrain alloc] init];
-  NSString *description = [[[NSString alloc] init] autorelease];
-  
-  for (id term in expression)
-  {
-    //handle operands
-    if ([term isKindOfClass:[NSNumber class]])
-      description = [description stringByAppendingFormat:
-                    @"%@ ", [term stringValue]];
-    
-    //handle string elements
-    else if ([term isKindOfClass:[NSString class]])
-    {
-      //handle operations
-      if ([term length] == 1)
-        description = [description stringByAppendingFormat:@"%@ ", term];
-      
-      //handle variables
-      else if([term length] == ([VAR_PREFIX length]+1) &&
-              [term characterAtIndex:0] == [VAR_PREFIX characterAtIndex:0])
-      {
-        description = [description stringByAppendingFormat:@"%c ",
-                         [term characterAtIndex:[VAR_PREFIX length]]];
-      }
-    }
-  }
-  
-  //release brain, and return varSet
-  [brain release];
-  return [description length] ? description : nil;
-}
-
-//-----------------------------
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*----------------------------{CLASS METHODS}----------------------------*/
@@ -65,6 +23,7 @@
 /*Evaluates the specified expression, substituting the specified values for
  *any variables found in the expression.
  *
+ *@param expression the expresion to be evaluated
  *return the result of the expression
  */
 + (double) evaluateExpression:(id)expression
@@ -116,7 +75,8 @@
  *The set contains each variable only once, regardless of the number of
  *times that it appears in the expression.
  *
- *@return the set of variables in expression
+ *@param expression the expresion whose variables are to be enumerated
+ *@return           the set of variables in expression
  */
 + (NSSet *)variablesInExpression:(id)expression
 {
@@ -146,6 +106,71 @@
   //release brain, and return varSet
   [brain release];
   return [varSet anyObject] ? varSet : nil;
+}
+
+/*Returns an NSString representation of the specified expression.
+ *
+ *@param expression the expresion to be converted
+ *@return           the string representation of the expression
+ */
++ (NSString *)descriptionOfExpression:(id)expression
+{
+  //create a brain to perform instance methods and an NSString to hold the
+  //the expression
+  CalculatorBrain *brain = [[CalculatorBrain alloc] init];
+  NSString *description = [[[NSString alloc] init] autorelease];
+  
+  for (id term in expression)
+  {
+    //handle operands
+    if ([term isKindOfClass:[NSNumber class]])
+      description = [description stringByAppendingFormat:
+                     @"%@ ", [term stringValue]];
+    
+    //handle string elements
+    else if ([term isKindOfClass:[NSString class]])
+    {
+      //handle operations
+      if ([term length] == 1)
+        description = [description stringByAppendingFormat:@"%@ ", term];
+      
+      //handle variables
+      else if([term length] == ([VAR_PREFIX length]+1) &&
+              [term characterAtIndex:0] == [VAR_PREFIX characterAtIndex:0])
+      {
+        description = [description stringByAppendingFormat:@"%c ",
+                       [term characterAtIndex:[VAR_PREFIX length]]];
+      }
+    }
+  }
+  
+  //release brain, and return varSet
+  [brain release];
+  return [description length] ? description : nil;
+}
+
+/*Returns the specified expression as a property list.
+ *As expressions are already property lists, an autoreleased copy of the
+ *specified expression is returned.
+ *
+ *@param expression the expresion to be converted
+ *@return           the property list
+ */
++ (id)propertyListForExpression:(id)expression
+{
+  return [[expression copy] autorelease];
+}
+
+/*Returns the specified property list as an expression.
+ *As expressions are already property lists, an autoreleased copy of the
+ *specified property list is returned.
+ *
+ *@param propertyList the expresion to be converted
+ *@return             the expression
+ */
++ (id)expressionForPropertyList:(id)propertyList
+{
+  return [[propertyList copy] autorelease];
 }
 
 

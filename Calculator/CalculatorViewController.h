@@ -43,9 +43,4 @@
 - (IBAction) evaluateBrainsExpression;
 
 
-//-----------------------------
-/*ASSIGNMENT 3 STUFF FOLLOWS*/
-//-----------------------------
-
-
 @end

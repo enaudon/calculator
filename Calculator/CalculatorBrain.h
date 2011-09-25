@@ -35,6 +35,15 @@
 //returns a set of the variables in the specified expression
 + (NSSet *)variablesInExpression:(id)expression;
 
+//returns a string representation of the specified expression
++ (NSString *)descriptionOfExpression:(id)expression;
+
+//returns a property list representation of the specified expression
++ (id)propertyListForExpression:(id)expression;
+
+//returns an expression from the specifed propertylist
++ (id)expressionForPropertyList:(id)propertyList;
+
 
 /*--------------------------{INSTANCE  METHODS}--------------------------*/
 //clears operands and waitingOperation
@@ -54,13 +63,5 @@
 //setter for operand (operand1)
 - (void) setOperand:(double)operand;
 
-
-//-----------------------------
-/*ASSIGNMENT 3 STUFF FOLLOWS*/
-//-----------------------------
-
-+ (NSString *)descriptionOfExpression:(id)expression;
-+ (id)propertyListForExpression:(id)expression;
-+ (id)expressionForPropertyList:(id)propertyList;
 
 @end
