@@ -55,7 +55,8 @@
         [brain performOperation:term];
       
       //handle variables
-      else if([term length] == ([VAR_PREFIX length]+1))
+      else if([term length] == ([VAR_PREFIX length]+1) &&
+              [term characterAtIndex:0] == [VAR_PREFIX characterAtIndex:0])
       {
         //get the key and corresponding value from variable dictionary
         NSString *key = [NSString stringWithFormat:@"%c",
@@ -75,6 +76,42 @@
   result = brain.operand;
   [brain release];
   return result;
+}
+
+/*Returns the set of variables that appear in the specified expression.
+ *The set contains each variable only once, regardless of the number of
+ *times that it appears in the expression.
+ *
+ *@return the set of variables in expression
+ */
++ (NSSet *)variablesInExpression:(id)expression
+{
+  //create a brain to perform instance methods and an NSSet to hold the
+  //variables in expression
+  CalculatorBrain *brain = [[CalculatorBrain alloc] init];
+  NSMutableSet *varSet = [[[NSMutableSet alloc] init] autorelease];
+  
+  for (id term in expression)
+  {
+    //make sure the term is a variable
+    //(as opposed to an operand or operation)
+    if ([term isKindOfClass:[NSString class]]    &&
+        [term length] == ([VAR_PREFIX length]+1) &&
+        [term characterAtIndex:0] == [VAR_PREFIX characterAtIndex:0])
+    {
+      //grab the variable
+      NSString *var = [NSString stringWithFormat:@"%c",
+                       [term characterAtIndex:[VAR_PREFIX length]]];
+      
+      //add the variable to the set if it isn't already in the set
+      if (![varSet member:var])
+        [varSet addObject:var];
+    }
+  }
+  
+  //release brain, and autorealease/return varSet
+  [brain release];
+  return varSet ? varSet : nil;
 }
 
 

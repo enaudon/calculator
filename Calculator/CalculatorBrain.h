@@ -32,6 +32,9 @@
 + (double) evaluateExpression:(id)expression
                 withVariables:(NSDictionary *)variables;
 
+//returns a set of the variables in the specified expression
++ (NSSet *)variablesInExpression:(id)expression;
+
 
 /*--------------------------{INSTANCE  METHODS}--------------------------*/
 //clears operands and waitingOperation
@@ -56,7 +59,6 @@
 /*ASSIGNMENT 3 STUFF FOLLOWS*/
 //-----------------------------
 
-+ (NSSet *)variablesInExpression:(id)expression;
 + (NSString *)descriptionOfExpression:(id)expression;
 + (id)propertyListForExpression:(id)expression;
 + (id)expressionForPropertyList:(id)propertyList;
