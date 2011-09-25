@@ -10,62 +10,23 @@
 #define VAR_PREFIX @"$"
 
 @implementation CalculatorBrain
-  @synthesize operand = operand1;
-  @synthesize waitingOperation;
 
-
+@synthesize waitingOperation;
+@synthesize operand = operand1, expression = internalExpression;
 
 //-----------------------------
 /*ASSIGNMENT 3 STUFF FOLLOWS*/
 //-----------------------------
 
-@synthesize expression = internalExpression;
 
 
-/*Setter for operand property.
- *(Note that operand is associated with the operand1
- *variable.)
- *
- *@param operand the new value of operand1
- */
-- (void) setOperand:(double)operand
-{
-  //initialize internalExpression as needed
-  if (!internalExpression)
-    internalExpression = [[NSMutableArray alloc] init];
-  
-  //add operand to internalExpression
-  [internalExpression addObject:[NSNumber numberWithDouble:operand]];
-  
-  //set operand1 to operand
-  operand1 = operand;
-}
+//-----------------------------
 
-/*Getter for expression property.
- *(Note that expression is associated with the internalExpression
- *variable.)
- *
- *return a copy of internalExpression
- */
-- (NSMutableArray *) expression
-{
-  return [[internalExpression copy] autorelease];
-}
 
-/*Adds a variable to internalExpression.
- *
- *@param variable the variable to be added
- */
-- (void) setVariableAsOperand:(NSString *)variable;
-{
-  //initialize internalExpression as needed
-  if (!internalExpression)
-    internalExpression = [[NSMutableArray alloc] init];
-  
-  //add operand to internalExpression
-  NSString *vp = VAR_PREFIX;
-  [internalExpression addObject:[vp stringByAppendingString:variable]];
-}
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*----------------------------{CLASS METHODS}----------------------------*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 
 /*Evaluates the specified expression, substituting the specified values for
  *any variables found in the expression.
@@ -73,7 +34,7 @@
  *return the result of the expression
  */
 + (double) evaluateExpression:(id)expression
-               usingVariables:(NSDictionary *)variables
+                withVariables:(NSDictionary *)variables
 {
   //create a brain to perform instance methods and a double to hold the
   //result of the evaluated expression
@@ -116,62 +77,60 @@
   return result;
 }
 
-//-----------------------------
 
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*--------------------------{INSTANCE  METHODS}--------------------------*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
 /*Clears instance variables.
  */
 - (void) clear
 {
-    operand1 = 0;
-    operand2 = 0;
-    memory   = 0;
-    self.waitingOperation = nil;
-    [internalExpression removeAllObjects];
+  operand1 = 0;
+  operand2 = 0;
+  memory   = 0;
+  self.waitingOperation = nil;
+  [internalExpression removeAllObjects];
 }
 
 /*Attempts to perform 2-operand operations.
- *If only one operand has been specified, nothing is done.
- *Also, note that the result of the calculation is stored
- *in the operand variable.
- *This method is private.
+ *If only one operand has been specified, nothing is done. Also, note that
+ *the result of the calculation is stored in the operand variable. This
+ *method is private.
  */
 - (void) performWaitingOperation
 {
-    //handle addition
-    if ([waitingOperation isEqual:@"+"])
-        operand1 = operand2 + operand1;
+  //handle addition
+  if ([waitingOperation isEqual:@"+"])
+      operand1 = operand2 + operand1;
     
-    //handle subtraction
-    else if ([waitingOperation isEqual:@"-"])
-      operand1 = operand2 - operand1;
+  //handle subtraction
+  else if ([waitingOperation isEqual:@"-"])
+    operand1 = operand2 - operand1;
     
-    //handle multiplication
-    else if ([waitingOperation isEqual:@"×"])
-      operand1 = operand2*operand1;
+  //handle multiplication
+  else if ([waitingOperation isEqual:@"×"])
+    operand1 = operand2*operand1;
     
-    //handle division
-    //note: fail silently for division by zero
-    //(fix that)
-    else if ([waitingOperation isEqual:@"÷"])
-      if (operand1)
-        operand1 = operand2/operand1;
+  //handle division
+  //note: fail silently for division by zero
+  //(fix that)
+  else if ([waitingOperation isEqual:@"÷"])
+    if (operand1)
+      operand1 = operand2/operand1;
 }
 
 /*Attempts to perform the specified operation.
- *If a 2-operand operation is requested, performWaitingOperation
- is called.
+ *If a 2-operand operation is requested, performWaitingOperation is called.
  *
  *@param operation the operation to be performed
  *@return          the result of the calculation
  */
 - (double) performOperation:(NSString *)operation
-{    
-  
-  
-  
-  
+{
   //initialize internalExpression as needed
   if (!internalExpression)
     internalExpression = [[NSMutableArray alloc] init];
@@ -179,72 +138,121 @@
   //add operation to internalExpression
   [internalExpression addObject:operation];
   
+  //handle square root
+  if ([operation isEqual:@"√x"])
+    operand1 = sqrt(operand1);
   
+  //handle square
+  else if ([operation isEqual:@"x²"])
+    operand1 = pow(operand1, 2);
   
+  //handle negation
+  //NOTE: this is not implemented yet!
+  else if ([operation isEqual:@"(-)"])
+    operand1 = - operand1;
   
+  //handle inversion
+  //note: fail silently for division by zero
+  //(fix that)
+  else if ([operation isEqual:@"1/x"])
+    if (operand1)
+      operand1 = 1/operand1;
+    //yes, this is sloppy, i know.  i'll get to it.
+    else {}
   
-    //handle square root
-    if ([operation isEqual:@"√x"])
-      operand1 = sqrt(operand1);
-    
-    //handle square
-    else if ([operation isEqual:@"x²"])
-      operand1 = pow(operand1, 2);
-    
-    //handle negation
-    //NOTE: this is not implemented yet!
-    else if ([operation isEqual:@"(-)"])
-      operand1 = - operand1;
-    
-    //handle inversion
-    //note: fail silently for division by zero
-    //(fix that)
-    else if ([operation isEqual:@"1/x"])
-      if (operand1)
-        operand1 = 1/operand1;
-      //yes, this is sloppy, i know.  i'll get to it.
-      else {}
-    
-    //handle sine
-    else if ([operation isEqual:@"sin"])
-      operand1 = sin(operand1);
-    
-    //handle cosine
-    else if ([operation isEqual:@"cos"])
-      operand1 = cos(operand1);
-    
-    //handle tangent
-    else if ([operation isEqual:@"tan"])
-      operand1 = tan(operand1);
+  //handle sine
+  else if ([operation isEqual:@"sin"])
+    operand1 = sin(operand1);
   
-    //handle storage
-      else if ([operation isEqual:@"Str"])
-        memory = operand1;
+  //handle cosine
+  else if ([operation isEqual:@"cos"])
+    operand1 = cos(operand1);
   
-    //handle recall
-      else if ([operation isEqual:@"Rcl"])
-        operand1 = memory;
-    
-    //handle addition
-      else if ([operation isEqual:@"M+"]) {
-        operand1 = memory + operand1;
-        memory = operand1;
-      }
-    
-    //handle subtraction
-      else if  ([operation isEqual:@"M-"]) {
-        operand1 = memory - operand1;
-        memory = operand1;
-      }
-    
-    //handle 2-operand operations
-    else {
-      [self performWaitingOperation];
-      self.waitingOperation = operation;
-      operand2 = operand1;
-    }
-    
-    return operand1;
+  //handle tangent
+  else if ([operation isEqual:@"tan"])
+    operand1 = tan(operand1);
+  
+  //handle storage
+  else if ([operation isEqual:@"Str"])
+    memory = operand1;
+  
+  //handle recall
+  else if ([operation isEqual:@"Rcl"])
+    operand1 = memory;
+  
+  //handle addition
+  else if ([operation isEqual:@"M+"]) {
+    operand1 = memory + operand1;
+    memory = operand1;
+  }
+  
+  //handle subtraction
+  else if  ([operation isEqual:@"M-"]) {
+    operand1 = memory - operand1;
+    memory = operand1;
+  }
+  
+  //handle 2-operand operations
+  else {
+    [self performWaitingOperation];
+    self.waitingOperation = operation;
+    operand2 = operand1;
+  }
+  
+  return operand1;
+}
+
+/*Adds a variable to the expression.
+ *
+ *@param variable the variable to be added
+ */
+- (void) setVariableAsOperand:(NSString *)variable;
+{
+  //initialize internalExpression as needed
+  if (!internalExpression)
+    internalExpression = [[NSMutableArray alloc] init];
+  
+  //add operand to internalExpression
+  NSString *vp = VAR_PREFIX;
+  [internalExpression addObject:[vp stringByAppendingString:variable]];
+}
+
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*-----------------{GETTERS, SETTERS AND OTHER  METHODS}-----------------*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/*Getter for expression property.
+ *(Note that expression is associated with the internalExpression
+ *variable.)
+ *
+ *return a copy of internalExpression
+ */
+- (id) expression
+{
+  return [[internalExpression copy] autorelease];
+}
+
+/*Setter for operand property.
+ *(Note that operand is associated with the operand1
+ *variable.)
+ *
+ *@param operand the new value of operand1
+ */
+- (void) setOperand:(double)operand
+{
+  //initialize internalExpression as needed
+  if (!internalExpression)
+    internalExpression = [[NSMutableArray alloc] init];
+  
+  //add operand to internalExpression
+  [internalExpression addObject:[NSNumber numberWithDouble:operand]];
+  
+  //set operand1 to operand
+  operand1 = operand;
 }
 
 /*Destructor.
