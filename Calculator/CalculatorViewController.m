@@ -10,6 +10,40 @@
 @implementation CalculatorViewController
   @synthesize brain, display;
 
+
+
+//-----------------------------
+/*ASSIGNMENT 3 STUFF FOLLOWS*/
+//-----------------------------
+
+/*Called when a variable-button is pressed.
+ *Adds the appropriate variable to the expression.
+ *
+ *@param sender the triggering button
+ */
+- (IBAction) variablePressed:(UIButton *)sender
+{
+  [self.brain setVariableAsOperand:[[sender titleLabel] text]];
+}
+
+
+/*Tests the functionality of the brain's expression evaluation
+ */
+- (IBAction) test
+{
+  NSDictionary *vars = [NSDictionary dictionaryWithObjectsAndKeys:
+                        [NSNumber numberWithInt:0x61], @"a",
+                        [NSNumber numberWithInt:0x62], @"b",
+                        [NSNumber numberWithInt:0x63], @"c",
+                        nil];
+  double result = [CalculatorBrain evaluateExpression:self.brain.expression
+                                       usingVariables:vars];
+  [self.display setText:[NSString stringWithFormat:@"%g", result]];
+}
+//-----------------------------
+
+
+
 /*Called when the clear button is pressed.
  *Clears the display, operands and waitingOperation
  *
@@ -76,8 +110,7 @@
     [self.display setText:[NSString stringWithFormat:@"%g", result]];
 }
 
-/*Supplies the calculator brain object.
- *Only allows one to be created.
+/*Getter for brain property.
  *
  *@return a pointer to our calculator brain object
  */

@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface CalculatorBrain : NSObject {
   @public
     double operand1;  //first operand
@@ -16,9 +15,10 @@
     NSString *waitingOperation;  //operation storage for
                                  //2-operand operations
     double memory;  //storage for the calculator
+    NSMutableArray *internalExpression;
 }
 //public properties
-@property double operand;
+@property (nonatomic) double operand;
 
 //private properties
 @property (retain) NSString *waitingOperation;
@@ -29,5 +29,24 @@
 
 //returns the result of the specified operation
 - (double) performOperation:(NSString *)operation;
+
+
+
+//-----------------------------
+/*ASSIGNMENT 3 STUFF FOLLOWS*/
+//-----------------------------
+
+- (void) setOperand:(double)operand;  //implemented
+- (void) setVariableAsOperand:(NSString *)variable;  //implemented
+
+//public properties
+@property (readonly) id expression;
+
++ (double) evaluateExpression:(id)expression
+               usingVariables:(NSDictionary *)variables;  //implemented
++ (NSSet *)variablesInExpression:(id)expression;
++ (NSString *)descriptionOfExpression:(id)expression;
++ (id)propertyListForExpression:(id)expression;
++ (id)expressionForPropertyList:(id)propertyList;
 
 @end

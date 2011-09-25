@@ -31,4 +31,15 @@
 //called when operation is pressed.  performs operation.
 - (IBAction) operationPressed:(UIButton *)sender;
 
+
+
+//-----------------------------
+/*ASSIGNMENT 3 STUFF FOLLOWS*/
+//-----------------------------
+
+//called when variable is pressed.  adds variable to expression.
+- (IBAction) variablePressed:(UIButton *)sender;
+
+- (IBAction) test;
+
 @end
