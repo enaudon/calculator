@@ -18,7 +18,41 @@
 /*ASSIGNMENT 3 STUFF FOLLOWS*/
 //-----------------------------
 
-
++ (NSString *)descriptionOfExpression:(id)expression
+{
+  //create a brain to perform instance methods and an NSString to hold the
+  //the expression
+  CalculatorBrain *brain = [[CalculatorBrain alloc] init];
+  NSString *description = [[[NSString alloc] init] autorelease];
+  
+  for (id term in expression)
+  {
+    //handle operands
+    if ([term isKindOfClass:[NSNumber class]])
+      description = [description stringByAppendingFormat:
+                    @"%s ", [term stringValue]];
+    
+    //handle string elements
+    else if ([term isKindOfClass:[NSString class]])
+    {
+      //handle operations
+      if ([term length] == 1)
+        description = [description stringByAppendingFormat:@"%@ ", term];
+      
+      //handle variables
+      else if([term length] == ([VAR_PREFIX length]+1) &&
+              [term characterAtIndex:0] == [VAR_PREFIX characterAtIndex:0])
+      {
+        description = [description stringByAppendingFormat:@"%c ",
+                         [term characterAtIndex:[VAR_PREFIX length]]];
+      }
+    }
+  }
+  
+  //release brain, and return varSet
+  [brain release];
+  return [description length] ? description : nil;
+}
 
 //-----------------------------
 
@@ -109,7 +143,7 @@
     }
   }
   
-  //release brain, and autorealease/return varSet
+  //release brain, and return varSet
   [brain release];
   return [varSet anyObject] ? varSet : nil;
 }

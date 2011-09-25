@@ -2132,8 +2132,8 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>338651663.60220701</real>
-		<string>{1393, 2390}</string>
+		<real>338653712.53702903</real>
+		<string>{1673, 1834}</string>
 		<string>{2931, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -2611,19 +2611,19 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>41</integer>
+					<integer>166</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>42</integer>
+					<integer>167</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>43</integer>
+					<integer>168</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>44</integer>
+					<integer>169</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
@@ -2646,8 +2646,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>338614608.32730901</real>
-		<string>{3, 1733}</string>
+		<real>338652401.17287201</real>
+		<string>{0, 1804}</string>
 		<string>{353, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -2928,9 +2928,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>338651644.15609902</real>
-		<string>{1386, 2850}</string>
-		<string>{3478, 0}</string>
+		<real>338653673.383542</real>
+		<string>{0, 1762}</string>
+		<string>{1574, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3901,7 +3901,7 @@
 				<integer>301</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>338651653.53042698</real>
+			<real>338653699.08461601</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -3912,7 +3912,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 9:54 AM</string>
+		<string>Today at 10:28 AM</string>
 		<integer>106</integer>
 		<string>Calculator</string>
 		<dict>
@@ -4213,7 +4213,7 @@
 				<integer>329</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/enaudon/Desktop/Calculator/Calculator/CalculatorBrain.h</string>
+		<string>file://localhost/Users/enaudon/Desktop/Calculator/Calculator/CalculatorBrain.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -4231,7 +4231,7 @@
 				<integer>331</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/enaudon/Desktop/Calculator/Calculator/CalculatorBrain.m</string>
+		<string>file://localhost/Users/enaudon/Desktop/Calculator/Calculator/CalculatorBrain.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8734,7 +8734,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>47</integer>
+					<integer>24</integer>
 				</dict>
 			</array>
 		</dict>
@@ -10602,7 +10602,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>338651663.60364097</real>
+		<real>338653712.53842998</real>
 		<string>{0, 1518}</string>
 		<string>{1220, 0}</string>
 		<string>-variablePressed:</string>
@@ -10640,7 +10640,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {580, 1219}}</string>
+		<string>{{0, 0}, {580, 814}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10893,8 +10893,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>338651663.60354602</real>
-		<string>{1393, 2390}</string>
+		<real>338653712.53833699</real>
+		<string>{1673, 1834}</string>
 		<string>{2931, 0}</string>
 		<string>-evaluateBrainsExpression</string>
 		<dict>
@@ -10929,7 +10929,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {1161, 1219}}</string>
+		<string>{{0, 0}, {1161, 814}}</string>
 		<string>{{874, 123}, {1681, 1295}}</string>
 		<dict>
 			<key>$class</key>
