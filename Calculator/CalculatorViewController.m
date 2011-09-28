@@ -61,7 +61,9 @@
 }
 
 /*Called when an operation-button is pressed.
- *Stores the operand and attempts to perform the specified operation.
+ *Stores the operand and attempts to perform the specified operation.  The
+ *display is updated with the result of the operation, or with the brain's
+ *expression if a variable has been pressed.
  *
  *@param sender the triggering button
  */

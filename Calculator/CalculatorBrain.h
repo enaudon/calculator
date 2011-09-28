@@ -14,7 +14,7 @@
   NSString *waitingOperation;  //operation storage for
                                //2-operand operations
   double memory;  //storage for the calculator
-  NSMutableArray *internalExpression;
+  NSMutableArray *internalExpression;  //expression for evaluation
 @public
   double operand1;  //first operand
 }

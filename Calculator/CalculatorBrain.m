@@ -151,7 +151,9 @@
 
 /*Returns the specified expression as a property list.
  *As expressions are already property lists, an autoreleased copy of the
- *specified expression is returned.
+ *specified expression is returned.  (A copy is returned instead of
+ *retaining and returning the original in case the caller needs to work
+ *with the expression AND the property list separately.)
  *
  *@param expression the expresion to be converted
  *@return           the property list
@@ -163,7 +165,9 @@
 
 /*Returns the specified property list as an expression.
  *As expressions are already property lists, an autoreleased copy of the
- *specified property list is returned.
+ *specified property list is returned.  (A copy is returned instead of
+ *retaining and returning the original in case the caller needs to work
+ *with the property list AND the expression separately.)
  *
  *@param propertyList the expresion to be converted
  *@return             the expression
@@ -276,13 +280,13 @@
   else if ([operation isEqual:@"Rcl"])
     operand1 = memory;
   
-  //handle addition
+  //handle memory addition
   else if ([operation isEqual:@"M+"]) {
     operand1 = memory + operand1;
     memory = operand1;
   }
   
-  //handle subtraction
+  //handle memory subtraction
   else if  ([operation isEqual:@"M-"]) {
     operand1 = memory - operand1;
     memory = operand1;
@@ -322,8 +326,9 @@
 
 
 /*Getter for expression property.
- *(Note that expression is associated with the internalExpression
- *variable.)
+ *A copy is returned to prevent the caller from modifying the contents of
+ *the expression.  (Note that expression is associated with the 
+ *internalExpression variable.)
  *
  *return a copy of internalExpression
  */
@@ -333,8 +338,8 @@
 }
 
 /*Setter for operand property.
- *(Note that operand is associated with the operand1
- *variable.)
+ *The specified operand is added to the expression.  (Note that operand is
+ *associated with the operand1 variable.)
  *
  *@param operand the new value of operand1
  */
