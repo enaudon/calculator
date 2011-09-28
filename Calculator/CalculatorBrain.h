@@ -50,7 +50,7 @@
 - (void) clear;
 
 //returns the result of the specified operation
-- (double) performOperation:(NSString *)operation;
+- (NSString *) performOperation:(NSString *)operation;
 
 //adds variable to internalExpression
 - (void) setVariableAsOperand:(NSString *)variable;

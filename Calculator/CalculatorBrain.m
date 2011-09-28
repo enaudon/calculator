@@ -8,6 +8,7 @@
 #import "CalculatorBrain.h"
 
 #define VAR_PREFIX @"$"
+#define DIV_ZERO   @"Err: Div by zero"
 
 @implementation CalculatorBrain
 
@@ -197,11 +198,12 @@
 }
 
 /*Attempts to perform 2-operand operations.
- *If only one operand has been specified, nothing is done. Also, note that
- *the result of the calculation is stored in the operand variable. This
- *method is private.
+ *If only one operand has been specified, nothing is done.  If an error
+ *(division by zero) has occured, 1 is returned; otherwise, an error code
+ *of 0 is returned.  Note that the result of the calculation is stored in
+ *the operand variable.  This method is private.
  */
-- (void) performWaitingOperation
+- (BOOL) performWaitingOperation
 {
   //handle addition
   if ([waitingOperation isEqual:@"+"])
@@ -216,26 +218,32 @@
     operand1 = operand2*operand1;
     
   //handle division
-  //note: fail silently for division by zero
-  //(fix that)
   else if ([waitingOperation isEqual:@"÷"])
     if (operand1)
       operand1 = operand2/operand1;
+    else return 1;
+  
+  return 0;
 }
 
 /*Attempts to perform the specified operation.
  *If a 2-operand operation is requested, performWaitingOperation is called.
+ *The result is returned as an NSString to facilitate returning error
+ *messages.
  *
  *@param operation the operation to be performed
  *@return          the result of the calculation
  */
-- (double) performOperation:(NSString *)operation
+- (NSString *) performOperation:(NSString *)operation
 {
+  //declare string to hold the result
+  NSString *result = DIV_ZERO;
+  
   //initialize internalExpression as needed
   if (!internalExpression)
     internalExpression = [[NSMutableArray alloc] init];
   
-  //add operation to internalExpression
+  //add operation to expression
   [internalExpression addObject:operation];
   
   //handle square root
@@ -252,13 +260,12 @@
     operand1 = - operand1;
   
   //handle inversion
-  //note: fail silently for division by zero
-  //(fix that)
   else if ([operation isEqual:@"1/x"])
     if (operand1)
       operand1 = 1/operand1;
     //yes, this is sloppy, i know.  i'll get to it.
-    else {}
+    else
+      return [result autorelease];
   
   //handle sine
   else if ([operation isEqual:@"sin"])
@@ -294,19 +301,21 @@
   
   //handle 2-operand operations
   else {
-    [self performWaitingOperation];
+    if ([self performWaitingOperation])
+      return [result autorelease];
     self.waitingOperation = operation;
     operand2 = operand1;
   }
   
-  return operand1;
+  result = [NSString stringWithFormat:@"%g", operand1];
+  return result;
 }
 
 /*Adds a variable to the expression.
  *
  *@param variable the variable to be added
  */
-- (void) setVariableAsOperand:(NSString *)variable;
+- (void) setVariableAsOperand:(NSString *)variable
 {
   //initialize internalExpression as needed
   if (!internalExpression)

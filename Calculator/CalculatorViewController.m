@@ -80,15 +80,14 @@
   
   //grab and perform operation
   NSString *operation = [[sender titleLabel] text];
-  double result = [self.brain performOperation:operation];
+  NSString *result    = [self.brain performOperation:operation];
   
   //display result
   if (expr)
     [self.display setText:[CalculatorBrain descriptionOfExpression:
                            self.brain.expression]];
   else
-    [self.display setText:[NSString stringWithFormat:@"%g", result]];
-    
+    [self.display setText:result];
 }
 
 /*Called when a variable-button is pressed.
