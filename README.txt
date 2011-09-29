@@ -7,11 +7,11 @@
 
 GENERAL INFORMATION
 * Program Name : Calculator
-* Version      : v3.0
+* Version      : v3.1
 * Institution  : Bowdoin College
 * Developer    : Enrique S. Naudon
 * Date Created : 09/13/11
-* Last Updated : 09/28/11
+* Last Updated : 09/29/11
 
 DESCRIPTION
      This is an Objective-C calculator app written for the 3rd generation
@@ -70,6 +70,11 @@ v2.8 - Expressions are shown on the display as they are being implemented.
 v2.9 - Implemented property list/expression conversion functionality.
 v3.0 - Implemented error reporting for division by zero.  Updated documentation
        (ie. this README).
+v3.1 - Improved access of the display's text.
+
+ACKNOWLEDGEMENTS
+     Thanks to EJ Googins for pointing out encapsulation and access issues with
+regard to the display and its associated property in v3.0's source code.
 
 CONTACT INFORMATION
 Enrique S. Naudon
@@ -82,4 +87,4 @@ enaudon@bowdoin.edu
 README's README
 * Author  : Enrique S. Naudon
 * Created : 09/19/11
-* Updated : 09/28/11
+* Updated : 09/29/11

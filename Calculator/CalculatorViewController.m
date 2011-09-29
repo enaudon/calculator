@@ -9,7 +9,7 @@
 
 @implementation CalculatorViewController
 
-@synthesize brain, display;
+@synthesize brain, displayText;
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -28,7 +28,7 @@
   typing = 0;          //clear typing
   real = 0;            //clear real
   expr = 0;            //clear expression
-  [self.display setText:@"0"];  //zero display
+  self.displayText = @"0";  //zero display
 }
 
 /*Called when a digit-button is pressed.
@@ -51,11 +51,10 @@
   //display digit
   //if the user is typing, append
   if (typing)
-    [self.display setText:[[self.display text]
-                           stringByAppendingString:digit]];
+    self.displayText = [self.displayText stringByAppendingString:digit];
   //otherwise, overwrite current display
   else {
-    [self.display setText:digit];
+    self.displayText = digit;
     typing = 1;
   }
 }
@@ -72,7 +71,7 @@
   //if the user is typing, grab and store operand
   //and clear real
   if (typing) {
-    double operand = [[self.display text] doubleValue];
+    double operand = [self.displayText doubleValue];
     self.brain.operand = operand;
     typing = 0;
     real = 0;
@@ -84,10 +83,10 @@
   
   //display result
   if (expr)
-    [self.display setText:[CalculatorBrain descriptionOfExpression:
-                           self.brain.expression]];
+    self.displayText = [CalculatorBrain descriptionOfExpression:
+                        self.brain.expression];
   else
-    [self.display setText:result];
+    self.displayText = result;
 }
 
 /*Called when a variable-button is pressed.
@@ -121,7 +120,25 @@
                         nil];
   double result = [CalculatorBrain evaluateExpression:self.brain.expression
                                         withVariables:vars];
-  [self.display setText:[NSString stringWithFormat:@"%g", result]];
+  self.displayText = [NSString stringWithFormat:@"%g", result];
+}
+
+/*Getter for display property.
+ *
+ *return the value of the display's text
+ */
+- (NSString *) displayText
+{
+  return [display text];
+}
+
+/*Setter for display property.
+ *
+ *@param the new value for the display's text.
+ */
+- (void) setDisplayText:(NSString *)text
+{
+  [display setText:text];
 }
 
 /*Getter for brain property.

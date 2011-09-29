@@ -21,7 +21,7 @@
 }
 //private properties
 @property (retain, nonatomic) CalculatorBrain  *brain;
-@property (retain)            IBOutlet UILabel *display;
+@property (copy)              NSString *displayText;    //display's text
 
 
 /*--------------------------{INSTANCE  METHODS}--------------------------*/
