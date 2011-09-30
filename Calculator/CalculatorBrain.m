@@ -7,9 +7,6 @@
 
 #import "CalculatorBrain.h"
 
-#define VAR_PREFIX @"$"
-#define DIV_ZERO   @"Err: Div by zero"
-
 @implementation CalculatorBrain
 
 @synthesize waitingOperation;
@@ -17,9 +14,58 @@
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*----------------------------{CLASS METHODS}----------------------------*/
+/*--------------------------{ PRIVATE METHODS }--------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+/*Attempts to perform 2-operand operations.
+ *If only one operand has been specified, nothing is done.  If an error
+ *(division by zero) has occured, 1 is returned; otherwise, an error code
+ *of 0 is returned.  Note that the result of the calculation is stored in
+ *the operand variable.  This method is private.
+ */
+- (BOOL) performWaitingOperation
+{
+  //handle addition
+  if ([waitingOperation isEqual:@"+"])
+    operand1 = operand2 + operand1;
+  
+  //handle subtraction
+  else if ([waitingOperation isEqual:@"-"])
+    operand1 = operand2 - operand1;
+  
+  //handle multiplication
+  else if ([waitingOperation isEqual:@"×"])
+    operand1 = operand2*operand1;
+  
+  //handle division
+  else if ([waitingOperation isEqual:@"÷"])
+    if (operand1)
+      operand1 = operand2/operand1;
+    else return 1;
+  
+  return 0;
+}
+
+/*Adds an object to the expression.
+ *This message is private.
+ *
+ *@param obj the object to be added to the expression
+ */
+- (void) addToExpression:(id)obj
+{
+   //initialize internalExpression as needed
+   if (!internalExpression)
+   internalExpression = [[NSMutableArray alloc] init];
+   
+   //add operation to expression
+   [internalExpression addObject:obj];
+}
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*---------------------------{ CLASS METHODS }---------------------------*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /*Evaluates the specified expression, substituting the specified values for
  *any variables found in the expression.
@@ -44,17 +90,12 @@
     //handle string elements
     else if ([term isKindOfClass:[NSString class]])
     {
-      //handle operations
-      if ([term length] == 1)
-        [brain performOperation:term];
-      
       //handle variables
-      else if([term length] == ([VAR_PREFIX length]+1) &&
-              [term characterAtIndex:0] == [VAR_PREFIX characterAtIndex:0])
+      if([term length] == ([VAR_PREFIX length]+1) &&
+         [term characterAtIndex:0] == [VAR_PREFIX characterAtIndex:0])
       {
         //get the key and corresponding value from variable dictionary
-        NSString *key = [NSString stringWithFormat:@"%c",
-                         [term characterAtIndex:[VAR_PREFIX length]]];
+        NSString *key = [term substringFromIndex:[VAR_PREFIX length]];
         id value = [variables valueForKey:key];
         
         //make sure the value (element at key) is an NSNumber
@@ -63,6 +104,9 @@
           [brain setOperand:operand];
         }
       }
+      //handle operations
+      else
+        [brain performOperation:term];
     }
   }
   
@@ -81,9 +125,7 @@
  */
 + (NSSet *)variablesInExpression:(id)expression
 {
-  //create a brain to perform instance methods and an NSSet to hold the
-  //variables in expression
-  CalculatorBrain *brain = [[CalculatorBrain alloc] init];
+  //createan NSSet to hold the variables in expression
   NSMutableSet *varSet = [[[NSMutableSet alloc] init] autorelease];
   
   for (id term in expression)
@@ -95,8 +137,7 @@
         [term characterAtIndex:0] == [VAR_PREFIX characterAtIndex:0])
     {
       //grab the variable
-      NSString *var = [NSString stringWithFormat:@"%c",
-                       [term characterAtIndex:[VAR_PREFIX length]]];
+      NSString *var = [term substringFromIndex:[VAR_PREFIX length]];
       
       //add the variable to the set if it isn't already in the set
       if (![varSet member:var])
@@ -104,8 +145,7 @@
     }
   }
   
-  //release brain, and return varSet
-  [brain release];
+  //return varSet
   return [varSet anyObject] ? varSet : nil;
 }
 
@@ -116,9 +156,7 @@
  */
 + (NSString *)descriptionOfExpression:(id)expression
 {
-  //create a brain to perform instance methods and an NSString to hold the
-  //the expression
-  CalculatorBrain *brain = [[CalculatorBrain alloc] init];
+  //create an NSString to hold the expression
   NSString *description = [[[NSString alloc] init] autorelease];
   
   for (id term in expression)
@@ -131,22 +169,20 @@
     //handle string elements
     else if ([term isKindOfClass:[NSString class]])
     {
-      //handle operations
-      if ([term length] == 1)
-        description = [description stringByAppendingFormat:@"%@ ", term];
-      
       //handle variables
-      else if([term length] == ([VAR_PREFIX length]+1) &&
-              [term characterAtIndex:0] == [VAR_PREFIX characterAtIndex:0])
+      if([term length] == ([VAR_PREFIX length]+1) &&
+         [term characterAtIndex:0] == [VAR_PREFIX characterAtIndex:0])
       {
-        description = [description stringByAppendingFormat:@"%c ",
-                       [term characterAtIndex:[VAR_PREFIX length]]];
+        NSString *var = [term substringFromIndex:[VAR_PREFIX length]];
+        description = [description stringByAppendingFormat:@"%@ ", var];
       }
+      //handle operations
+      else
+        description = [description stringByAppendingFormat:@"%@ ", term];
     }
   }
   
-  //release brain, and return varSet
-  [brain release];
+  //return description
   return [description length] ? description : nil;
 }
 
@@ -182,9 +218,8 @@
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*--------------------------{INSTANCE  METHODS}--------------------------*/
+/*-------------------------{ INSTANCE  METHODS }-------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 
 /*Clears instance variables.
  */
@@ -195,35 +230,6 @@
   memory   = 0;
   self.waitingOperation = nil;
   [internalExpression removeAllObjects];
-}
-
-/*Attempts to perform 2-operand operations.
- *If only one operand has been specified, nothing is done.  If an error
- *(division by zero) has occured, 1 is returned; otherwise, an error code
- *of 0 is returned.  Note that the result of the calculation is stored in
- *the operand variable.  This method is private.
- */
-- (BOOL) performWaitingOperation
-{
-  //handle addition
-  if ([waitingOperation isEqual:@"+"])
-      operand1 = operand2 + operand1;
-    
-  //handle subtraction
-  else if ([waitingOperation isEqual:@"-"])
-    operand1 = operand2 - operand1;
-    
-  //handle multiplication
-  else if ([waitingOperation isEqual:@"×"])
-    operand1 = operand2*operand1;
-    
-  //handle division
-  else if ([waitingOperation isEqual:@"÷"])
-    if (operand1)
-      operand1 = operand2/operand1;
-    else return 1;
-  
-  return 0;
 }
 
 /*Attempts to perform the specified operation.
@@ -239,12 +245,8 @@
   //declare string to hold the result
   NSString *result = DIV_ZERO;
   
-  //initialize internalExpression as needed
-  if (!internalExpression)
-    internalExpression = [[NSMutableArray alloc] init];
-  
-  //add operation to expression
-  [internalExpression addObject:operation];
+  //add the operand to the expression
+  [self addToExpression:operation];
   
   //handle square root
   if ([operation isEqual:@"√x"])
@@ -316,23 +318,18 @@
  *@param variable the variable to be added
  */
 - (void) setVariableAsOperand:(NSString *)variable
-{
-  //initialize internalExpression as needed
-  if (!internalExpression)
-    internalExpression = [[NSMutableArray alloc] init];
-  
+{ 
   //add operand to internalExpression
   NSString *vp = VAR_PREFIX;
-  [internalExpression addObject:[vp stringByAppendingString:variable]];
+  [self addToExpression:[vp stringByAppendingString:variable]];
 }
 
 
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*-----------------{GETTERS, SETTERS AND OTHER  METHODS}-----------------*/
+/*----------------{ GETTERS, SETTERS AND OTHER  METHODS }----------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 
 /*Getter for expression property.
  *A copy is returned to prevent the caller from modifying the contents of
@@ -353,13 +350,9 @@
  *@param operand the new value of operand1
  */
 - (void) setOperand:(double)operand
-{
-  //initialize internalExpression as needed
-  if (!internalExpression)
-    internalExpression = [[NSMutableArray alloc] init];
-  
+{  
   //add operand to internalExpression
-  [internalExpression addObject:[NSNumber numberWithDouble:operand]];
+  [self addToExpression:[NSNumber numberWithDouble:operand]];
   
   //set operand1 to operand
   operand1 = operand;

@@ -7,6 +7,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define VAR_PREFIX @"$"
+#define DIV_ZERO   @"Err: Div by zero"
+
 @interface CalculatorBrain : NSObject {
 
 @private
@@ -27,7 +30,7 @@
 @property (readonly) id expression;
 
 
-/*----------------------------{CLASS METHODS}----------------------------*/
+/*---------------------------{ CLASS METHODS }---------------------------*/
 //returns the result of the specified expression
 + (double) evaluateExpression:(id)expression
                 withVariables:(NSDictionary *)variables;
@@ -45,7 +48,7 @@
 + (id)expressionForPropertyList:(id)propertyList;
 
 
-/*--------------------------{INSTANCE  METHODS}--------------------------*/
+/*-------------------------{ INSTANCE  METHODS }-------------------------*/
 //clears operands and waitingOperation
 - (void) clear;
 
@@ -56,7 +59,7 @@
 - (void) setVariableAsOperand:(NSString *)variable;
 
 
-/*-----------------{GETTERS, SETTERS AND OTHER  METHODS}-----------------*/
+/*----------------{ GETTERS, SETTERS AND OTHER  METHODS }----------------*/
 //getter for expression (internalExpression)
 - (id) expression;
 

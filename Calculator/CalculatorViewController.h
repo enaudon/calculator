@@ -9,9 +9,11 @@
 #import "CalculatorBrain.h"
 
 @interface CalculatorViewController : UIViewController {
+
 @private
-  CalculatorBrain *brain;     //class that performs calculations
-  IBOutlet UILabel *display;  //calculator's display
+  CalculatorBrain   *brain;    //class that performs calculations
+  IBOutlet UILabel  *display;  //calculator's display
+  IBOutlet UIButton *eval;     //evaluation button
   BOOL typing;  //0 = user done specifying operand
                 //1 = user specifying operand
   BOOL real;    //0 = user has specified an integer
@@ -19,12 +21,15 @@
   BOOL expr;    //0 = user is not typing an expression
                 //1 = user is typing an expression
 }
+
 //private properties
 @property (retain, nonatomic) CalculatorBrain  *brain;
 @property (copy)              NSString *displayText;    //display's text
+@property (readonly)          UIButton *eval;
+@property (nonatomic)         BOOL expr;
 
 
-/*--------------------------{INSTANCE  METHODS}--------------------------*/
+/*-------------------------{ INSTANCE  METHODS }-------------------------*/
 //called when clear is pressed.  clears display and vars.
 - (IBAction) clearPressed:(UIButton *)sender;
 
@@ -37,10 +42,8 @@
 //called when variable is pressed.  adds variable to expression.
 - (IBAction) variablePressed:(UIButton *)sender;
 
-
-/*-----------------{GETTERS, SETTERS AND OTHER  METHODS}-----------------*/
 //called when Eval is pressed.  evaluates the brain's expression.
-- (IBAction) evaluateBrainsExpression;
+- (IBAction) evaluateExpression;
 
 
 @end

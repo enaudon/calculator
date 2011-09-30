@@ -33,6 +33,8 @@ KNOWN BUGS/ISSUES
 - During expression-building, when a digit is pressed, it is shown alone on the
   display until the next operation is pressed.
 - Variable values are hardcoded as their ASCII/unicode encodings.
+- Eval button is enable at initialization despite there being no expression to
+  evaluate.
 
 VERSION HISTORY
 v1.0 - Five function (+, -, *, / and sqrt) calculator.  Only supported integer
@@ -70,11 +72,14 @@ v2.8 - Expressions are shown on the display as they are being implemented.
 v2.9 - Implemented property list/expression conversion functionality.
 v3.0 - Implemented error reporting for division by zero.  Updated documentation
        (ie. this README).
-v3.1 - Improved access of the display's text.
+v3.1 - Evaluate button is now disable when an expression is not being built.
+       Improved display management and the implimentation of several functions.
 
 ACKNOWLEDGEMENTS
      Thanks to EJ Googins for pointing out encapsulation and access issues with
-regard to the display and its associated property in v3.0's source code.
+regard to the display and its associated property, in addition to errors in
+several methods that required iterating through the expressions elements in
+v3.0's source code.
 
 CONTACT INFORMATION
 Enrique S. Naudon

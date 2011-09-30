@@ -9,13 +9,12 @@
 
 @implementation CalculatorViewController
 
-@synthesize brain, displayText;
+@synthesize brain, displayText, eval, expr;
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*--------------------------{INSTANCE  METHODS}--------------------------*/
+/*-------------------------{ INSTANCE  METHODS }-------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 
 /*Called when the clear button is pressed.
  *Clears the display, operands and waitingOperation
@@ -27,7 +26,7 @@
   [self.brain clear];  //clear brain variables
   typing = 0;          //clear typing
   real = 0;            //clear real
-  expr = 0;            //clear expression
+  self.expr = 0;            //clear expression
   self.displayText = @"0";  //zero display
 }
 
@@ -96,23 +95,15 @@
  */
 - (IBAction) variablePressed:(UIButton *)sender
 {
-  expr = 1;
+  self.expr = 1;
   [self.brain setVariableAsOperand:[[sender titleLabel] text]];
 }
 
-
-
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*-----------------{GETTERS, SETTERS AND OTHER  METHODS}-----------------*/
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-
-/*Tests the functionality of the brain's expression evaluation
+/*Evaluates the brain's current expression.
  */
-- (IBAction) evaluateBrainsExpression
+- (IBAction) evaluateExpression
 {
-  expr = 0;
+  self.expr = 0;
   NSDictionary *vars = [NSDictionary dictionaryWithObjectsAndKeys:
                         [NSNumber numberWithInt:0x61], @"a",
                         [NSNumber numberWithInt:0x62], @"b",
@@ -123,7 +114,30 @@
   self.displayText = [NSString stringWithFormat:@"%g", result];
 }
 
-/*Getter for display property.
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*----------------{ GETTERS, SETTERS AND OTHER  METHODS }----------------*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/*Setter for expr property.
+ *This method also enables/disables the eval button appropriately.
+ *
+ *@param state the new value for expr.
+ */
+- (void) setExpr:(BOOL)state
+{
+  if (state == 0) {
+    expr = 0;
+    self.eval.enabled = 0;
+  }
+  else if (state == 1) {
+    expr = 1;
+    self.eval.enabled = 1;
+  }
+}
+
+/*Getter for displayText property.
  *
  *return the value of the display's text
  */
@@ -132,7 +146,7 @@
   return [display text];
 }
 
-/*Setter for display property.
+/*Setter for displayText property.
  *
  *@param the new value for the display's text.
  */
