@@ -19,11 +19,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-     
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
-    return YES;
+  //create nav controller and other view controllers
+  UINavigationController *nc   = [[UINavigationController alloc] init];
+  CalculatorViewController *cvc = [[CalculatorViewController alloc] init];
+  
+  //add calc view controller to nav controller and release
+  [nc pushViewController:cvc animated:0];
+  [cvc release];
+  
+  
+  [self.window addSubview:nc.view];
+  [self.window makeKeyAndVisible];
+  return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
