@@ -20,7 +20,7 @@
 
 - (void)releaseOutlets
 {
-	[self releaseOutlets];
+  
 }
 
 - (void)viewDidUnload

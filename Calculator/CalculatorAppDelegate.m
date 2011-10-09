@@ -18,7 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   //create nav controller and other view controllers
-  UINavigationController *nc   = [[UINavigationController alloc] init];
+  UINavigationController *nc = [[UINavigationController alloc] init];
   CalculatorViewController *cvc = [[CalculatorViewController alloc] init];
   
   //add calc view controller to nav controller and release

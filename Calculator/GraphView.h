@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#define X 0;
+#define Y 1;
 
 @interface GraphView : UIView {
-    
+
 }
 
 @end
