@@ -12,6 +12,17 @@
 @synthesize brain, displayText, eval, expr;
 
 
+/*++++++++++++++++++++{ ASSIGNMENT 4!!!! } ++++++++++++++++++++ */
+- (IBAction) pushGraph
+{
+  GraphViewController *gvc = [[GraphViewController alloc] init];
+  [self.navigationController pushViewController:gvc animated:1];
+  [gvc release];
+  
+}
+
+//END ASSIGN 4
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*-------------------------{ INSTANCE  METHODS }-------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

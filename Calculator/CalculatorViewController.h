@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CalculatorBrain.h"
+#import "GraphViewController.h"
 
 @interface CalculatorViewController : UIViewController {
 
@@ -28,6 +29,11 @@
 @property (readonly)          UIButton *eval;
 @property (nonatomic)         BOOL expr;
 
+
+/*++++++++++++++++++++{ ASSIGNMENT 4!!!! } ++++++++++++++++++++ */
+- (IBAction) pushGraph;
+
+//END ASSIGN 4
 
 /*-------------------------{ INSTANCE  METHODS }-------------------------*/
 //called when clear is pressed.  clears display and vars.
