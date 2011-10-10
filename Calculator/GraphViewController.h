@@ -12,16 +12,16 @@
 @interface GraphViewController : UIViewController <GraphViewDelegate> {
   
 @private
-	GraphView *graph;
+	IBOutlet GraphView *graph;
   
 @public
   NSArray *points;
 }
 
 //private properties
-@property (nonatomic, retain) IBOutlet GraphView *graph;
+@property (retain) IBOutlet GraphView *graph;
 
 //public properties
-@property (nonatomic, copy) NSArray *points;
+@property (nonatomic, retain) NSArray *points;
 
 @end

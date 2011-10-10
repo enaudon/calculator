@@ -30,6 +30,12 @@
 @property (readonly) id expression;
 
 
+
+/*++++++++++++++++++++{ ASSIGNMENT 4!!!! } ++++++++++++++++++++ */
++ (NSArray *) generatePointsForExpression:(id) expression
+                              withXValues:(NSArray *)values;
+
+
 /*---------------------------{ CLASS METHODS }---------------------------*/
 //returns the result of the specified expression
 + (double) evaluateExpression:(id)expression

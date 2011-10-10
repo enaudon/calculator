@@ -15,21 +15,21 @@
 @synthesize points;
 
 
-
-/*Getter for graph property.
- *
- *@return a pointer to our calculator graph object
- */
-- (GraphView *) graph
-{
-  if (!graph)
-    graph = [[GraphView alloc] init];
-  return graph;
-}
-  
 - (void)updateUI
 {
 	[self.graph setNeedsDisplay];
+}
+
+/*Setter for points property.
+ *
+ *@param newPts the new set of points.
+ */
+- (void) setPoints:(NSArray *)newPts
+{
+  [newPts retain];
+  if (points) [points release];
+  points = newPts;
+  [self updateUI];
 }
 
 - (void)viewDidLoad
