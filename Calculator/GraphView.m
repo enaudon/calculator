@@ -19,13 +19,31 @@
     return self;
 }
 
-/*Draws the specified axis.
+/*Graphs a curve through the specified points.
  *
- *@param axis the axis to draw
+ *@param numPts the number of points
+ *@param points the points the curve intersects
  */
-- (void) drawAxis:(short)axis
+- (void) graphCurveThroughThese:(short)numPts
+                         Points:(CGPoint[])points
 {
+  //point selector variable
+  CGPoint *pt = points;
   
+  //get context and start path
+	CGContextRef context = UIGraphicsGetCurrentContext();
+  CGContextBeginPath(context);
+  CGContextMoveToPoint(context, pt->x, pt->y);
+  
+  //build path
+  register int i;
+  for (i = 1; i < numPts; ++i) {
+    pt = &points[i];
+    CGContextAddLineToPoint(context, pt->x, pt->y);
+  }
+  
+  //draw curve
+  CGContextDrawPath(context, kCGPathStroke);
 }
 
 /*Draws a set of (x,y) axes into the specified rect.
@@ -43,13 +61,6 @@
   CGFloat width  = self.bounds.size.width;   //witdth
   CGFloat height = self.bounds.size.height;  //height
 	
-  /*
-	CGFloat size = self.bounds.size.width / 2;
-	if (self.bounds.size.height < self.bounds.size.width)
-    size = self.bounds.size.height / 2;
-	size *= 0.90;
-  */
-	
   //get context
 	CGContextRef context = UIGraphicsGetCurrentContext();
   
@@ -64,6 +75,26 @@
   CGContextMoveToPoint(context, origin.x, 0);
   CGContextAddLineToPoint(context, origin.x, height);
   CGContextDrawPath(context, kCGPathFillStroke);
+  
+  //test graphing
+  CGPoint pt[10];
+  
+  pt[0].x = 0; pt[0].y = height;
+  pt[1].x = 0; pt[1].y = height;
+  pt[2].x = 0; pt[2].y = height;
+  
+  pt[3].x = origin.x; pt[3].y = origin.y;
+  pt[4].x = origin.x; pt[4].y = origin.y;
+  pt[5].x = origin.x; pt[5].y = origin.y;
+  
+  pt[6].x = width; pt[6].y = 0;
+  pt[7].x = width; pt[7].y = 0;
+  pt[8].x = width; pt[8].y = 0;
+  
+  pt[9].x = 30; pt[9].y = 30;
+  
+  [self graphCurveThroughThese:10
+                        Points:pt];
 }
 
 - (void) dealloc
