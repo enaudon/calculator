@@ -8,11 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-#define X 0;
-#define Y 1;
+
+@class GraphView;
+
+@protocol GraphViewDelegate
+  - (NSArray *)pointsForCurve:(GraphView *)requestor;
+
+@end
+
 
 @interface GraphView : UIView {
 
+@private
+  id <GraphViewDelegate> delegate;
 }
+
+//private property
+@property (assign) id <GraphViewDelegate> delegate;
 
 @end

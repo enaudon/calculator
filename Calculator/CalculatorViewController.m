@@ -16,6 +16,12 @@
 - (IBAction) pushGraph
 {
   GraphViewController *gvc = [[GraphViewController alloc] init];
+  gvc.points = [NSArray arrayWithObjects:
+                [NSNumber numberWithInt:50],
+                [NSNumber numberWithInt:50],
+                [NSNumber numberWithInt:300],
+                [NSNumber numberWithInt:300],
+                nil];
   [self.navigationController pushViewController:gvc animated:1];
   [gvc release];
   

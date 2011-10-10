@@ -9,13 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "GraphView.h"
 
-@interface GraphViewController : UIViewController {
+@interface GraphViewController : UIViewController <GraphViewDelegate> {
   
 @private
-	GraphView *gv;
+	GraphView *graph;
+  
+@public
+  NSArray *points;
 }
 
 //private properties
-@property (retain) IBOutlet GraphView *gv;
+@property (nonatomic, retain) IBOutlet GraphView *graph;
+
+//public properties
+@property (nonatomic, copy) NSArray *points;
 
 @end

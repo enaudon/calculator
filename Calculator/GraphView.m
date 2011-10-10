@@ -11,11 +11,11 @@
 
 @implementation GraphView
 
+@synthesize delegate;
+
 - (id) initWithFrame:(CGRect)frame
 {
-    if ([super initWithFrame:frame]) {
-        // Initialization code
-    }
+    if ([super initWithFrame:frame]) {}
     return self;
 }
 
@@ -24,26 +24,33 @@
  *@param numPts the number of points
  *@param points the points the curve intersects
  */
-- (void) graphCurveThroughThese:(short)numPts
-                         Points:(CGPoint[])points
+- (void) drawCurveInContext:(CGContextRef)context
 {
-  //point selector variable
-  CGPoint *pt = points;
+  //points array and x/y selector variables
+  NSArray *points = [self.delegate pointsForCurve:self];
+  NSNumber *x = [points objectAtIndex: 0],
+           *y = [points objectAtIndex: 1];
   
-  //get context and start path
-	CGContextRef context = UIGraphicsGetCurrentContext();
+  //push context and start path
+	UIGraphicsPushContext(context);
   CGContextBeginPath(context);
-  CGContextMoveToPoint(context, pt->x, pt->y);
+  CGContextMoveToPoint(context, [x floatValue], [y floatValue]);
   
   //build path
   register int i;
-  for (i = 1; i < numPts; ++i) {
-    pt = &points[i];
-    CGContextAddLineToPoint(context, pt->x, pt->y);
+  for (i = 1; i < [points count]/2; ++i) {
+    
+    //get point coordinates
+    x = [points objectAtIndex: 2*i];
+    y = [points objectAtIndex: 2*i+1];
+    
+    //add connect cuve to point
+    CGContextAddLineToPoint(context, [x floatValue], [y floatValue]);
   }
   
-  //draw curve
-  CGContextDrawPath(context, kCGPathStroke);
+  //draw curve and pop context
+	CGContextStrokePath(context);
+	UIGraphicsPopContext();
 }
 
 /*Draws a set of (x,y) axes into the specified rect.
@@ -76,25 +83,8 @@
   CGContextAddLineToPoint(context, origin.x, height);
   CGContextDrawPath(context, kCGPathFillStroke);
   
-  //test graphing
-  CGPoint pt[10];
-  
-  pt[0].x = 0; pt[0].y = height;
-  pt[1].x = 0; pt[1].y = height;
-  pt[2].x = 0; pt[2].y = height;
-  
-  pt[3].x = origin.x; pt[3].y = origin.y;
-  pt[4].x = origin.x; pt[4].y = origin.y;
-  pt[5].x = origin.x; pt[5].y = origin.y;
-  
-  pt[6].x = width; pt[6].y = 0;
-  pt[7].x = width; pt[7].y = 0;
-  pt[8].x = width; pt[8].y = 0;
-  
-  pt[9].x = 30; pt[9].y = 30;
-  
-  [self graphCurveThroughThese:10
-                        Points:pt];
+  //draw curve
+  [self drawCurveInContext:context];
 }
 
 - (void) dealloc
