@@ -25,13 +25,13 @@
  *@param numPts the number of points
  *@param points the points the curve intersects
  */
-- (void) drawCurveInContext:(CGContextRef)context
+- (void) drawCurveInContext1:(CGContextRef)context
 {
   //x- and y-value arrays and selector variables
   NSArray *xValues = [self.delegate xValuesForCurve:self];
   NSArray *yValues = [self.delegate yValuesForCurve:self];
   NSNumber *x = [xValues objectAtIndex: 0],
-           *y = [yValues objectAtIndex: 0];
+  *y = [yValues objectAtIndex: 0];
   
   //push context and start path
 	UIGraphicsPushContext(context);
@@ -48,6 +48,41 @@
     
     //add connect cuve to point
     CGContextAddLineToPoint(context, [x floatValue], [y floatValue]);
+  }
+  
+  //draw curve and pop context
+	CGContextStrokePath(context);
+	UIGraphicsPopContext();
+}
+
+/*Graphs a curve through the specified points.
+ *
+ *@param numPts the number of points
+ *@param points the points the curve intersects
+ */
+- (void) drawCurveInContext:(CGContextRef)context
+{
+  //x- and y-value selector variables
+  float x = (0 - width/2)/SCALE;
+  float y = [delegate yValueForX:x] * SCALE;
+  y += height/2 - 2*y;
+  
+  //push context and start path
+	UIGraphicsPushContext(context);
+  CGContextBeginPath(context);
+  CGContextMoveToPoint(context, x, y);
+  
+  //build path
+  register int i;
+  for (i = 1; i <= width; ++i) {
+    
+    //get point coordinates
+    x = (i - width/2)/SCALE;
+    y = [delegate yValueForX:x] * SCALE;
+    y += height/2 - 2*y;
+    
+    //add connect cuve to point
+    CGContextAddLineToPoint(context, i, y);
   }
   
   //draw curve and pop context
@@ -76,7 +111,7 @@
   //draw axes
   [AxesDrawer drawAxesInRect:rect
                originAtPoint:origin
-                       scale:30];
+                       scale:SCALE];
   
   //draw curve
   [self drawCurveInContext:context];

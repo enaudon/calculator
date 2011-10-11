@@ -90,6 +90,26 @@
 }
 
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*-------------------------{ PROTOCOL  METHODS }-------------------------*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+- (double) solveForYWithX:(double)x
+{
+  //grab expression
+  id expression = internalExpression;
+  
+  //translate x-value to dictionary
+  NSDictionary *vars = [NSDictionary dictionaryWithObjectsAndKeys:
+                        [NSNumber numberWithDouble:x], @"x",
+                        nil];
+  
+  //solve and returnx
+  return [CalculatorBrain evaluateExpression:expression
+                               withVariables:vars];
+}
+
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*---------------------------{ CLASS METHODS }---------------------------*/

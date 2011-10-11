@@ -6,11 +6,12 @@
 //  Copyright 2011 Bowdoin College. All rights reserved.
 
 #import <Foundation/Foundation.h>
+#import "GraphViewController.h"
 
 #define VAR_PREFIX @"$"
 #define DIV_ZERO   @"Err: Div by zero"
 
-@interface CalculatorBrain : NSObject {
+@interface CalculatorBrain : NSObject <Solver> {
 
 @private
   double operand2;  //second operand
@@ -35,6 +36,9 @@
 + (NSArray *) generatePointsForExpression:(id) expression
                               withXValues:(NSArray *)values;
 
+/*-------------------------{ PROTOCOL  METHODS }-------------------------*/
+//returns the y-value for given x-value
+- (double) solveForYWithX:(double)x;
 
 /*---------------------------{ CLASS METHODS }---------------------------*/
 //returns the result of the specified expression

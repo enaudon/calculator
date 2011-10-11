@@ -15,11 +15,8 @@
 /*++++++++++++++++++++{ ASSIGNMENT 4!!!! } ++++++++++++++++++++ */
 - (IBAction) pushGraph
 {
-  GraphViewController *gvc = [[GraphViewController alloc] init];
-  NSArray *pts = [CalculatorBrain
-                  generatePointsForExpression:self.brain.expression
-                                  withXValues:gvc.xValues];
-  gvc.yValues = pts;
+  GraphViewController *gvc = [[GraphViewController alloc]
+                                          initWithSolver:self.brain];
   [self.navigationController pushViewController:gvc animated:1];
   [gvc release];
   

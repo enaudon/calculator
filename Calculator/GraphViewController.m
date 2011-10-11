@@ -42,6 +42,17 @@
 /*-------------------------{ PROTOCOL  METHODS }-------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+/*Returns the corresponding y-value for the specified x-value.
+ *The y-value must be translated to display properly on a plane where the
+ *origin is not at (0,0) before it is returned.
+ *
+ *@return y the (translated) corresponding y-value
+ */
+- (float) yValueForX:(float)x
+{
+  return [solver solveForYWithX:x];
+}
+
 /*Returns the set of x-values for graphing.
  *The x-values have to be translated to display properly on a plane where
  *the origin is not at (0,0) before they are returned.
@@ -121,7 +132,7 @@
 }
 
 /*Getter for xValues property.
- *The x-values array is generated using the scale of the graph.
+ *The x-values array is generated using the dimentions of the graph.
  *
  *@return the xValues
  */
@@ -132,7 +143,7 @@
   
   //space STEP x-values out over the graph's x-value range
   register int x;
-  for (x = self.minX; x <= self.maxX; x+=self.xRange/STEP)
+  for (x = 0; x <= graph.width; ++x)
     [values addObject:[NSNumber numberWithDouble:x]];
   
   return values;
@@ -188,10 +199,13 @@
 
 /*Constructor.
  */
--(id)init
+-(id)initWithSolver:(id)brain
 {
   if ([super init])
   {
+    //store solver
+    solver = brain;
+    
     //initialize scale to default values
     self.minX = MIN_X;
     self.maxX = MAX_X;

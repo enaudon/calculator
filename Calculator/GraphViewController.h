@@ -15,10 +15,19 @@
 #define MAX_Y 100
 #define STEP 100
 
+
+@class GraphViewController;
+
+@protocol Solver
+  - (double) solveForYWithX:(double)x;
+@end
+
+
 @interface GraphViewController : UIViewController <GraphViewDelegate> {
-  
+
 @private
 	IBOutlet GraphView *graph;
+  id <Solver> solver;
   
 @public
   NSArray *yValues;
@@ -55,6 +64,9 @@
 //getter for ranges
 - (double) xRange;
 - (double) xRange;
+
+/*---------------------------{ OTHER METHODS }---------------------------*/
+-(id)initWithSolver:(id)brain;
 
 
 @end

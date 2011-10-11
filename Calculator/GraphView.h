@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "AxesDrawer.h"
 
+#define SCALE 20
+
 
 @class GraphView;
 
 @protocol GraphViewDelegate
   - (NSArray *) xValuesForCurve:(GraphView *)requestor;
   - (NSArray *) yValuesForCurve:(GraphView *)requestor;
+  - (float) yValueForX:(float)x;
 @end
 
 
