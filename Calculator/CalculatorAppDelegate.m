@@ -25,7 +25,7 @@
   [nc pushViewController:cvc animated:0];
   [cvc release];
   
-  
+  //add and display nav controller
   [self.window addSubview:nc.view];
   [self.window makeKeyAndVisible];
   return YES;

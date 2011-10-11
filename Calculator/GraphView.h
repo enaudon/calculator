@@ -9,14 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "AxesDrawer.h"
 
-#define SCALE 20
+#define SCALE 18
 
 
 @class GraphView;
 
 @protocol GraphViewDelegate
-  - (NSArray *) xValuesForCurve:(GraphView *)requestor;
-  - (NSArray *) yValuesForCurve:(GraphView *)requestor;
   - (float) yValueForX:(float)x;
 @end
 
@@ -25,13 +23,10 @@
 
 @private
   id <GraphViewDelegate> delegate;
-  CGFloat width, height;
+  CGPoint origin;
 }
 
 //private property
 @property (assign) id <GraphViewDelegate> delegate;
-
-//public properties
-@property (readonly) float width, height;
 
 @end

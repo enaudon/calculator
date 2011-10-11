@@ -13,34 +13,6 @@
 @synthesize operand = operand1, expression = internalExpression;
 
 
-/*++++++++++++++++++++{ ASSIGNMENT 4!!!! } ++++++++++++++++++++ */
-+ (NSArray *) generatePointsForExpression:(id) expression
-                              withXValues:(NSArray *)xValues
-{
-  ///create a brain to perform instance methods, an array to hold the
-  //resultant x and y values, a dictionary to pass the x-value, and a
-  //double to hold the y-values
-  NSMutableArray *yValues = [[[NSMutableArray alloc] init] autorelease];
-  NSDictionary *x;
-  double y;
-  
-  //loop through x-values
-  for (id ele in xValues)
-    if ([ele isKindOfClass:[NSNumber class]])
-    {
-      //get y-value by evaluating at x
-      x = [NSDictionary dictionaryWithObjectsAndKeys:ele, @"x", nil];
-      y = [CalculatorBrain evaluateExpression:expression
-                                withVariables:x];
-    
-      //store y-value for return
-      [yValues addObject:[NSNumber numberWithDouble:y]];
-    }
-  return yValues;
-}
-
-//END ASSIGN 4
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*--------------------------{ PRIVATE METHODS }--------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -94,6 +66,10 @@
 /*-------------------------{ PROTOCOL  METHODS }-------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+/*Returns the corresponding y-value for the specified x-value.
+ *
+ *@return the y-value
+ */
 - (double) solveForYWithX:(double)x
 {
   //grab expression
@@ -108,7 +84,6 @@
   return [CalculatorBrain evaluateExpression:expression
                                withVariables:vars];
 }
-
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -263,8 +238,6 @@
 }
 
 
-
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*-------------------------{ INSTANCE  METHODS }-------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -373,8 +346,6 @@
 }
 
 
-
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*------------------------{ GETTERS AND SETTERS }------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -405,8 +376,6 @@
   //set operand1 to operand
   operand1 = operand;
 }
-
-
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

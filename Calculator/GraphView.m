@@ -12,48 +12,11 @@
 @implementation GraphView
 
 @synthesize delegate;
-@synthesize width, height;
 
-- (id) initWithFrame:(CGRect)frame
-{
-    if ([super initWithFrame:frame]) {}
-    return self;
-}
 
-/*Graphs a curve through the specified points.
- *
- *@param numPts the number of points
- *@param points the points the curve intersects
- */
-- (void) drawCurveInContext1:(CGContextRef)context
-{
-  //x- and y-value arrays and selector variables
-  NSArray *xValues = [self.delegate xValuesForCurve:self];
-  NSArray *yValues = [self.delegate yValuesForCurve:self];
-  NSNumber *x = [xValues objectAtIndex: 0],
-  *y = [yValues objectAtIndex: 0];
-  
-  //push context and start path
-	UIGraphicsPushContext(context);
-  CGContextBeginPath(context);
-  CGContextMoveToPoint(context, [x floatValue], [y floatValue]);
-  
-  //build path
-  register int i;
-  for (i = 1; i < [xValues count]; ++i) {
-    
-    //get point coordinates
-    x = [xValues objectAtIndex: i];
-    y = [yValues objectAtIndex: i];
-    
-    //add connect cuve to point
-    CGContextAddLineToPoint(context, [x floatValue], [y floatValue]);
-  }
-  
-  //draw curve and pop context
-	CGContextStrokePath(context);
-	UIGraphicsPopContext();
-}
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*--------------------------{ PRIVATE METHODS }--------------------------*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /*Graphs a curve through the specified points.
  *
@@ -62,27 +25,33 @@
  */
 - (void) drawCurveInContext:(CGContextRef)context
 {
-  //x- and y-value selector variables
-  float x = (0 - width/2)/SCALE;
-  float y = [delegate yValueForX:x] * SCALE;
-  y += height/2 - 2*y;
-  
+  //convert initial display x-value (0) to coordinate value
+  float disp_x  = 0,
+        coord_x = (disp_x - origin.x)/SCALE;
+
+  //convert initial coordinate y-value to display value
+  float coord_y = [delegate yValueForX:coord_x],
+        disp_y  = coord_y*SCALE + origin.y - 2*(coord_y*SCALE);
+
   //push context and start path
 	UIGraphicsPushContext(context);
   CGContextBeginPath(context);
-  CGContextMoveToPoint(context, x, y);
+  CGContextMoveToPoint(context, disp_x, disp_y);
   
   //build path
   register int i;
-  for (i = 1; i <= width; ++i) {
+  for (i = 1; i <= 2*origin.x; ++i) {
     
-    //get point coordinates
-    x = (i - width/2)/SCALE;
-    y = [delegate yValueForX:x] * SCALE;
-    y += height/2 - 2*y;
+    //grab display x-value and convert to coordinate x-value
+    disp_x = i;
+    coord_x = (disp_x - origin.x)/SCALE;
     
-    //add connect cuve to point
-    CGContextAddLineToPoint(context, i, y);
+    //get coordinate y-value from delegate and convert to display y-value
+    coord_y = [delegate yValueForX:coord_x];
+    disp_y  = coord_y*SCALE + origin.y - 2*(coord_y*SCALE);
+    
+    //connect display point to curve
+    CGContextAddLineToPoint(context, disp_x, disp_y);
   }
   
   //draw curve and pop context
@@ -90,20 +59,22 @@
 	UIGraphicsPopContext();
 }
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*---------------------------{ OTHER METHODS }---------------------------*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 /*Draws a set of (x,y) axes into the specified rect.
  *
  *@param rect the rect to draw into
  */
 - (void) drawRect:(CGRect)rect
 {
-  NSLog(@"draw");
-  
-  //get width, height and origin
-  CGPoint origin;
-  width  = self.bounds.size.width;
-  height = self.bounds.size.height;
-  origin.x = width/2;
-  origin.y = height/2;
+  //get origin
+  CGPoint temp;
+  temp.x = self.bounds.size.width/2;
+  temp.y = self.bounds.size.height/2;
+  origin = temp;
 	
   //get context
 	CGContextRef context = UIGraphicsGetCurrentContext();
@@ -117,30 +88,11 @@
   [self drawCurveInContext:context];
 }
 
-/*Getter for width property.
- *Notice that the width variable is a CGFloat, while the property is a
- *float.  This is done to simplify the life of objects who use the GV's
- *width.
- */
-- (float) width
-{
-  return (float)width;
-}
-
-/*Getter for height property.
- *Notice that the height variable is a CGFloat, while the property is a
- *float.  This is done to simplify the life of objects who use the GV's
- *height.
- */
-- (float) height
-{
-  return (float)height;
-}
-
 /*Destructor.
  */
 - (void) dealloc
 {
+  self.delegate = nil;
   [super dealloc];
 }
 

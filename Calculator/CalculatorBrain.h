@@ -32,10 +32,6 @@
 
 
 
-/*++++++++++++++++++++{ ASSIGNMENT 4!!!! } ++++++++++++++++++++ */
-+ (NSArray *) generatePointsForExpression:(id) expression
-                              withXValues:(NSArray *)values;
-
 /*-------------------------{ PROTOCOL  METHODS }-------------------------*/
 //returns the y-value for given x-value
 - (double) solveForYWithX:(double)x;

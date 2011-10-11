@@ -9,20 +9,8 @@
 
 @implementation CalculatorViewController
 
-@synthesize brain, displayText, eval, expr;
+@synthesize brain, graph, displayText, eval, expr;
 
-
-/*++++++++++++++++++++{ ASSIGNMENT 4!!!! } ++++++++++++++++++++ */
-- (IBAction) pushGraph
-{
-  GraphViewController *gvc = [[GraphViewController alloc]
-                                          initWithSolver:self.brain];
-  [self.navigationController pushViewController:gvc animated:1];
-  [gvc release];
-  
-}
-
-//END ASSIGN 4
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*-------------------------{ INSTANCE  METHODS }-------------------------*/
@@ -111,22 +99,12 @@
   [self.brain setVariableAsOperand:[[sender titleLabel] text]];
 }
 
-/*Evaluates the brain's current expression.
+/*Graphs the brain's current expression.
  */
-- (IBAction) evaluateExpression
+- (IBAction) graphPressed
 {
-  self.expr = 0;
-  NSDictionary *vars = [NSDictionary dictionaryWithObjectsAndKeys:
-                        [NSNumber numberWithInt:0x61], @"a",
-                        [NSNumber numberWithInt:0x62], @"b",
-                        [NSNumber numberWithInt:0x63], @"c",
-                        nil];
-  double result = [CalculatorBrain evaluateExpression:self.brain.expression
-                                        withVariables:vars];
-  self.displayText = [NSString stringWithFormat:@"%g", result];
+  [self.navigationController pushViewController:self.graph animated:1];
 }
-
-
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -178,7 +156,18 @@
   return brain;
 }
 
-
+/*Getter for graph property.
+ *
+ *@return a pointer to our graph object
+ */
+- (GraphViewController *) graph
+{
+  if (!graph) {
+    graph = [[GraphViewController alloc] init];
+    graph.solver = self.brain;
+  }
+  return graph;
+}
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -192,6 +181,7 @@
   //release instance variables
   [display release];
   [brain   release];
+  [graph release];
   
   //call super-class' destructor
   [super dealloc];
