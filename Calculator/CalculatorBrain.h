@@ -65,7 +65,7 @@
 - (void) setVariableAsOperand:(NSString *)variable;
 
 
-/*----------------{ GETTERS, SETTERS AND OTHER  METHODS }----------------*/
+/*------------------------{ GETTERS AND SETTERS }------------------------*/
 //getter for expression (internalExpression)
 - (id) expression;
 

@@ -16,11 +16,11 @@
 - (IBAction) pushGraph
 {
   GraphViewController *gvc = [[GraphViewController alloc] init];
-  [self.navigationController pushViewController:gvc animated:1];
   NSArray *pts = [CalculatorBrain
                   generatePointsForExpression:self.brain.expression
                                   withXValues:gvc.xValues];
   gvc.yValues = pts;
+  [self.navigationController pushViewController:gvc animated:1];
   [gvc release];
   
 }
@@ -131,8 +131,9 @@
 
 
 
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*----------------{ GETTERS, SETTERS AND OTHER  METHODS }----------------*/
+/*------------------------{ GETTERS AND SETTERS }------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /*Setter for expr property.
@@ -179,6 +180,13 @@
   if (!brain) brain = [[CalculatorBrain alloc] init];
   return brain;
 }
+
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*---------------------------{ OTHER METHODS }---------------------------*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /*Destructor.
  */

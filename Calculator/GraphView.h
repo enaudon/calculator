@@ -12,7 +12,6 @@
 @class GraphView;
 
 @protocol GraphViewDelegate
-  - (NSArray *)pointsForCurve:(GraphView *)requestor;
   - (NSArray *) xValuesForCurve:(GraphView *)requestor;
   - (NSArray *) yValuesForCurve:(GraphView *)requestor;
 @end
