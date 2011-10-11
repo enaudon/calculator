@@ -63,24 +63,20 @@
 {
   NSLog(@"draw");
   
-  //get width and height
+  //get width, height and origin
+  CGPoint origin;
   width  = self.bounds.size.width;
   height = self.bounds.size.height;
+  origin.x = width/2;
+  origin.y = height/2;
 	
   //get context
 	CGContextRef context = UIGraphicsGetCurrentContext();
   
-  //draw x-axis
-  CGContextBeginPath(context);
-  CGContextMoveToPoint(context, 0, height/2);
-  CGContextAddLineToPoint(context, width, height/2);
-  CGContextDrawPath(context, kCGPathFillStroke);
-  
-  //draw y-axis
-  CGContextBeginPath(context);
-  CGContextMoveToPoint(context, width/2, 0);
-  CGContextAddLineToPoint(context, width/2, height);
-  CGContextDrawPath(context, kCGPathFillStroke);
+  //draw axes
+  [AxesDrawer drawAxesInRect:rect
+               originAtPoint:origin
+                       scale:30];
   
   //draw curve
   [self drawCurveInContext:context];

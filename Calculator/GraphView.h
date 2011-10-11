@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AxesDrawer.h"
 
 
 @class GraphView;
