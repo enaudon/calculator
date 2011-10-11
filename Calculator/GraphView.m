@@ -12,6 +12,7 @@
 @implementation GraphView
 
 @synthesize delegate;
+@synthesize width, height;
 
 - (id) initWithFrame:(CGRect)frame
 {
@@ -26,10 +27,11 @@
  */
 - (void) drawCurveInContext:(CGContextRef)context
 {
-  //points array and x/y selector variables
-  NSArray *points = [self.delegate pointsForCurve:self];
-  NSNumber *x = [points objectAtIndex: 0],
-           *y = [points objectAtIndex: 1];
+  //x- and y-value arrays and selector variables
+  NSArray *xValues = [self.delegate xValuesForCurve:self];
+  NSArray *yValues = [self.delegate yValuesForCurve:self];
+  NSNumber *x = [xValues objectAtIndex: 0],
+           *y = [yValues objectAtIndex: 0];
   
   //push context and start path
 	UIGraphicsPushContext(context);
@@ -38,11 +40,11 @@
   
   //build path
   register int i;
-  for (i = 1; i < [points count]/2; ++i) {
+  for (i = 1; i < [xValues count]; ++i) {
     
     //get point coordinates
-    x = [points objectAtIndex: 2*i];
-    y = [points objectAtIndex: 2*i+1];
+    x = [xValues objectAtIndex: i];
+    y = [yValues objectAtIndex: i];
     
     //add connect cuve to point
     CGContextAddLineToPoint(context, [x floatValue], [y floatValue]);
@@ -61,32 +63,51 @@
 {
   NSLog(@"draw");
   
-  //get spacial information about the rect
-	CGPoint origin;  //midpoint
-	origin.x = self.bounds.origin.x + self.bounds.size.width/2;
-	origin.y = self.bounds.origin.y + self.bounds.size.height/2;
-  CGFloat width  = self.bounds.size.width;   //witdth
-  CGFloat height = self.bounds.size.height;  //height
+  //get width and height
+  width  = self.bounds.size.width;
+  height = self.bounds.size.height;
 	
   //get context
 	CGContextRef context = UIGraphicsGetCurrentContext();
   
   //draw x-axis
   CGContextBeginPath(context);
-  CGContextMoveToPoint(context, 0, origin.y);
-  CGContextAddLineToPoint(context, width, origin.y);
+  CGContextMoveToPoint(context, 0, height/2);
+  CGContextAddLineToPoint(context, width, height/2);
   CGContextDrawPath(context, kCGPathFillStroke);
   
   //draw y-axis
   CGContextBeginPath(context);
-  CGContextMoveToPoint(context, origin.x, 0);
-  CGContextAddLineToPoint(context, origin.x, height);
+  CGContextMoveToPoint(context, width/2, 0);
+  CGContextAddLineToPoint(context, width/2, height);
   CGContextDrawPath(context, kCGPathFillStroke);
   
   //draw curve
   [self drawCurveInContext:context];
 }
 
+/*Getter for width property.
+ *Notice that the width variable is a CGFloat, while the property is a
+ *float.  This is done to simplify the life of objects who use the GV's
+ *width.
+ */
+- (float) width
+{
+  return (float)width;
+}
+
+/*Getter for height property.
+ *Notice that the height variable is a CGFloat, while the property is a
+ *float.  This is done to simplify the life of objects who use the GV's
+ *height.
+ */
+- (float) height
+{
+  return (float)height;
+}
+
+/*Destructor.
+ */
 - (void) dealloc
 {
   [super dealloc];

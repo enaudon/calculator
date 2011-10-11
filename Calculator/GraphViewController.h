@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "GraphView.h"
 
+#define STEP 100
+
 @interface GraphViewController : UIViewController <GraphViewDelegate> {
   
 @private
@@ -23,5 +25,7 @@
 
 //public properties
 @property (nonatomic, retain) NSArray *points;
+@property (readonly, retain) NSArray *xValues;
+@property (nonatomic, retain) NSArray *yValues;
 
 @end

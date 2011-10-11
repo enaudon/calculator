@@ -15,31 +15,28 @@
 
 /*++++++++++++++++++++{ ASSIGNMENT 4!!!! } ++++++++++++++++++++ */
 + (NSArray *) generatePointsForExpression:(id) expression
-                              withXValues:(NSArray *)values
+                              withXValues:(NSArray *)xValues
 {
   ///create a brain to perform instance methods, an array to hold the
   //resultant x and y values, a dictionary to pass the x-value, and a
   //double to hold the y-values
-  NSMutableArray *xy = [[[NSMutableArray alloc] init] autorelease];
+  NSMutableArray *yValues = [[[NSMutableArray alloc] init] autorelease];
   NSDictionary *x;
   double y;
   
   //loop through x-values
-  for (id ele in values)
+  for (id ele in xValues)
     if ([ele isKindOfClass:[NSNumber class]])
     {
-      //store x-value for return
-      [xy addObject:ele];
-    
       //get y-value by evaluating at x
       x = [NSDictionary dictionaryWithObjectsAndKeys:ele, @"x", nil];
       y = [CalculatorBrain evaluateExpression:expression
                                 withVariables:x];
     
       //store y-value for return
-      [xy addObject:[NSNumber numberWithDouble:y]];
+      [yValues addObject:[NSNumber numberWithDouble:y]];
     }
-  return xy;
+  return yValues;
 }
 
 //END ASSIGN 4

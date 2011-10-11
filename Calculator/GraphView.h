@@ -13,7 +13,8 @@
 
 @protocol GraphViewDelegate
   - (NSArray *)pointsForCurve:(GraphView *)requestor;
-
+  - (NSArray *) xValuesForCurve:(GraphView *)requestor;
+  - (NSArray *) yValuesForCurve:(GraphView *)requestor;
 @end
 
 
@@ -21,9 +22,13 @@
 
 @private
   id <GraphViewDelegate> delegate;
+  CGFloat width, height;
 }
 
 //private property
 @property (assign) id <GraphViewDelegate> delegate;
+
+//public properties
+@property (readonly) float width, height;
 
 @end

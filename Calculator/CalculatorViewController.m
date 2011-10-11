@@ -16,16 +16,11 @@
 - (IBAction) pushGraph
 {
   GraphViewController *gvc = [[GraphViewController alloc] init];
+  [self.navigationController pushViewController:gvc animated:1];
   NSArray *pts = [CalculatorBrain
                   generatePointsForExpression:self.brain.expression
-                                  withXValues:[NSArray arrayWithObjects:
-                                               [NSNumber numberWithInt:0],
-                                               [NSNumber numberWithInt:10],
-                                               [NSNumber numberWithInt:50],
-                                               [NSNumber numberWithInt:100],
-                                               nil]];
-  gvc.points = pts;
-  [self.navigationController pushViewController:gvc animated:1];
+                                  withXValues:gvc.xValues];
+  gvc.yValues = pts;
   [gvc release];
   
 }
