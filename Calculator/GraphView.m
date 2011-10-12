@@ -24,14 +24,15 @@
  *@param points the points the curve intersects
  */
 - (void) drawCurveInContext:(CGContextRef)context
+                  withScale:(CGFloat)scale
 {
   //convert initial display x-value (0) to coordinate value
-  float disp_x  = 0,
-        coord_x = (disp_x - origin.x)/SCALE;
+  CGFloat disp_x  = 0,
+          coord_x = (disp_x - origin.x)/scale;
 
   //convert initial coordinate y-value to display value
-  float coord_y = [delegate yValueForX:coord_x],
-        disp_y  = coord_y*SCALE + origin.y - 2*(coord_y*SCALE);
+  CGFloat coord_y = [delegate yValueForX:coord_x],
+          disp_y  = coord_y*scale + origin.y - 2*(coord_y*scale);
 
   //push context and start path
 	UIGraphicsPushContext(context);
@@ -44,11 +45,11 @@
     
     //grab display x-value and convert to coordinate x-value
     disp_x = i;
-    coord_x = (disp_x - origin.x)/SCALE;
+    coord_x = (disp_x - origin.x)/scale;
     
     //get coordinate y-value from delegate and convert to display y-value
     coord_y = [delegate yValueForX:coord_x];
-    disp_y  = coord_y*SCALE + origin.y - 2*(coord_y*SCALE);
+    disp_y  = coord_y*scale + origin.y - 2*(coord_y*scale);
     
     //connect display point to curve
     CGContextAddLineToPoint(context, disp_x, disp_y);
@@ -70,22 +71,22 @@
  */
 - (void) drawRect:(CGRect)rect
 {
-  //get origin
+  //get origin, scale and context
   CGPoint temp;
   temp.x = self.bounds.size.width/2;
   temp.y = self.bounds.size.height/2;
   origin = temp;
-	
-  //get context
+  CGFloat scale = [delegate scale];
 	CGContextRef context = UIGraphicsGetCurrentContext();
   
   //draw axes
   [AxesDrawer drawAxesInRect:rect
                originAtPoint:origin
-                       scale:SCALE];
+                       scale:scale];
   
   //draw curve
-  [self drawCurveInContext:context];
+  [self drawCurveInContext:context
+                 withScale:scale];
 }
 
 /*Destructor.

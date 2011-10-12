@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "AxesDrawer.h"
 
-#define SCALE 18
-
 
 @class GraphView;
 
 @protocol GraphViewDelegate
-  - (float) yValueForX:(float)x;
+  - (CGFloat) yValueForX:(float)x;
+  - (CGFloat) scale;
+
 @end
 
 

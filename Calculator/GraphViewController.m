@@ -11,8 +11,8 @@
 
 @implementation GraphViewController
 
-@synthesize graph;
-@synthesize solver;
+@synthesize graph, magnifier, solver;
+@synthesize scale;
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -45,9 +45,28 @@
  *
  *@return y the (translated) corresponding y-value
  */
-- (float) yValueForX:(float)x
+- (CGFloat) yValueForX:(float)x
 {
   return [solver solveForYWithX:x];
+}
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*-------------------------{ PROTOCOL  METHODS }-------------------------*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/*Called when the magnifcation slider is changed.
+ *Stores the new scale value and asks the graph to redraw.
+ *
+ *@param sender the triggering slider
+ */
+- (IBAction) mangificationChanged:(UISlider *)sender;
+{
+  //update scale
+  self.scale = [sender value];
+  
+  //redraw graph
+  [self updateUI];
 }
 
 
@@ -55,8 +74,19 @@
 /*---------------------------{ OTHER METHODS }---------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+/*Called just before the GVC is displayed.
+ *
+ *@param animated true if the GVC is animated
+ */
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [self updateUI];
+}
+
 /*Called after the GVC (self) load.
- *Declare GVC (self) as the graph's delgate and redraw the UI.
+ *Declare self as the graph's delgate, set min and max scale values, and
+ *redraw the UI.
  */
 - (void)viewDidLoad
 {
@@ -64,6 +94,11 @@
   
   //declare self as GV's delegate
   self.graph.delegate = self;
+  
+  //set min and max scale values
+  self.magnifier.minimumValue = MINIMUM_SCALE;
+  self.magnifier.maximumValue = MAXIMUM_SCALE;
+  self.magnifier.value        = DEFAULT_SCALE;
   
   //redraw
   [self updateUI];
@@ -76,6 +111,17 @@
 {
 	[self releaseOutlets];  //release subviews
   [super viewDidUnload];
+}
+
+/*Constructor.
+ */
+- (id) init
+{
+  if ([super init]) {
+    //initialize scale
+    self.scale = DEFAULT_SCALE;
+  }
+  return self;
 }
 
 /*Destructor.
