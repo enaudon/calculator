@@ -12,6 +12,7 @@
 #define MINIMUM_SCALE 1
 #define DEFAULT_SCALE 18
 #define MAXIMUM_SCALE 125
+#define DEFAULT_DRAW_METHOD 
 
 
 @class GraphViewController;
@@ -27,6 +28,7 @@
 @private
 	IBOutlet GraphView *graph;
   IBOutlet UISlider *magnifier;
+  IBOutlet UISwitch *drawMethod;
   id <Solver> solver;
 @public
   CGFloat scale;
@@ -35,10 +37,12 @@
 //private properties
 @property (retain) IBOutlet GraphView *graph;
 @property (readonly) IBOutlet UISlider *magnifier;
+@property (readonly) IBOutlet UISwitch *drawMethod;
 @property (retain) id <Solver> solver;
 
 //public properties
-@property CGFloat scale;
+@property (readonly) CGFloat scale;
+@property (readonly) bool dotDraw;
 
 
 /*-------------------------{ PROTOCOL  METHODS }-------------------------*/
@@ -51,6 +55,9 @@
 /*-------------------------{ INSTANCE  METHODS }-------------------------*/
 //called when magnification is changed.  redraws graph.
 - (IBAction) mangificationChanged:(UISlider *)sender;
+
+//called when the drawing method is changed.  redraws graph.
+- (IBAction) drawMethodSwitched:(UISwitch *)sender;
 
 
 @end

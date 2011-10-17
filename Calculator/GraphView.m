@@ -26,10 +26,9 @@
 - (void) drawCurveInContext:(CGContextRef)context
                   withScale:(CGFloat)scale
 {
+  
   //rect for drawing dots
   CGRect dot; CGPoint dotOrigin; CGSize dotSize;
-  dotSize.width = 1.25; dotSize.height = 1.25;
-  dot.size = dotSize;
   
   //convert initial display x-value (0) to coordinate value
   CGFloat disp_x  = 0,
@@ -39,10 +38,19 @@
   CGFloat coord_y = [delegate yValueForX:coord_x],
           disp_y  = coord_y*scale + origin.y - 2*(coord_y*scale);
 
-  //push context and start path
-	UIGraphicsPushContext(context);
-  CGContextBeginPath(context);
-  CGContextMoveToPoint(context, disp_x, disp_y);
+  if ([delegate dotDraw])
+  {
+    //setup rect size
+    dotSize.width = 1.25; dotSize.height = 1.25;
+    dot.size = dotSize;
+  }
+  else
+  {
+    //push context and start path
+    UIGraphicsPushContext(context);
+    CGContextBeginPath(context);
+    CGContextMoveToPoint(context, disp_x, disp_y);
+  }
   
   //build path
   register int i;
@@ -56,16 +64,21 @@
     coord_y = [delegate yValueForX:coord_x];
     disp_y  = coord_y*scale + origin.y - 2*(coord_y*scale);
     
-    //set pixel location
-    dotOrigin.x = disp_x;
-    dotOrigin.y = disp_y;
-    dot.origin = dotOrigin;
-    
-    //color pixel (i.e. draw rect over pixel)
-    CGContextFillRect(context, dot);
-    
-    //connect display point to curve
-    //CGContextAddLineToPoint(context, disp_x, disp_y);
+    if ([delegate dotDraw])
+    {
+      //set pixel location
+      dotOrigin.x = disp_x;
+      dotOrigin.y = disp_y;
+      dot.origin = dotOrigin;
+      
+      //color pixel (i.e. draw rect over pixel)
+      CGContextFillRect(context, dot);
+    }
+    else
+    {
+      //connect display point to curve
+      CGContextAddLineToPoint(context, disp_x, disp_y);
+    }
   }
   
   //draw curve and pop context

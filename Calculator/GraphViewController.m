@@ -11,8 +11,8 @@
 
 @implementation GraphViewController
 
-@synthesize graph, magnifier, solver;
-@synthesize scale;
+@synthesize graph, magnifier, drawMethod, solver;
+@synthesize scale, dotDraw;
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -52,7 +52,7 @@
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*-------------------------{ PROTOCOL  METHODS }-------------------------*/
+/*-------------------------{ INSTANCE  METHODS }-------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /*Called when the magnifcation slider is changed.
@@ -63,7 +63,19 @@
 - (IBAction) mangificationChanged:(UISlider *)sender;
 {
   //update scale
-  self.scale = [sender value];
+  scale = [sender value];
+  
+  //redraw graph
+  [self updateUI];
+}
+
+/*Called when the drawing method switch is flipped.
+ *Records the state of the switch and asks the graph to redraw.
+ */
+- (IBAction) drawMethodSwitched:(UISwitch *)sender
+{
+  //update drawing method
+  dotDraw = sender.on;
   
   //redraw graph
   [self updateUI];
@@ -100,6 +112,8 @@
   self.magnifier.maximumValue = MAXIMUM_SCALE;
   self.magnifier.value        = DEFAULT_SCALE;
   
+  self.drawMethod.on = false;
+  
   //redraw
   [self updateUI];
 }
@@ -118,8 +132,9 @@
 - (id) init
 {
   if ([super init]) {
-    //initialize scale
-    self.scale = DEFAULT_SCALE;
+    //initialize variables
+    scale = DEFAULT_SCALE;
+    dotDraw = 0;
   }
   return self;
 }
