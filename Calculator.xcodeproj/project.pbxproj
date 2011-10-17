@@ -135,13 +135,13 @@
 				C013FD1D142025C3009188DD /* CalculatorViewController.xib */,
 				C013FD3E14202799009188DD /* CalculatorBrain.h */,
 				C013FD3F14202799009188DD /* CalculatorBrain.m */,
+				C099AA4E1442237E0031F4CD /* GraphViewController.h */,
+				C099AA4F1442237E0031F4CD /* GraphViewController.m */,
+				C099AA501442237E0031F4CD /* GraphViewController.xib */,
 				C099AA271442113A0031F4CD /* GraphView.h */,
 				C099AA281442113A0031F4CD /* GraphView.m */,
 				C0F56F731444B9E300882E4B /* AxesDrawer.h */,
 				C0F56F741444B9E300882E4B /* AxesDrawer.m */,
-				C099AA4E1442237E0031F4CD /* GraphViewController.h */,
-				C099AA4F1442237E0031F4CD /* GraphViewController.m */,
-				C099AA501442237E0031F4CD /* GraphViewController.xib */,
 				C013FD0C142025C3009188DD /* Supporting Files */,
 			);
 			path = Calculator;
