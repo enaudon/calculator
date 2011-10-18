@@ -303,11 +303,11 @@
     operand1 = tan(operand1);
   
   //handle storage
-  else if ([operation isEqual:@"Str"])
+  else if ([operation isEqual:@"MS"])
     memory = operand1;
   
   //handle recall
-  else if ([operation isEqual:@"Rcl"])
+  else if ([operation isEqual:@"MR"])
     operand1 = memory;
   
   //handle memory addition

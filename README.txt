@@ -80,6 +80,7 @@ ACKNOWLEDGEMENTS
 regard to the display and its associated property, in addition to errors in
 several methods that required iterating through the expressions elements in
 v3.0's source code.
+     Thanks to Hartley Brodey for showing me how to change the background color of my UIButtons.
 
 CONTACT INFORMATION
 Enrique S. Naudon
