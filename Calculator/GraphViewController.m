@@ -104,6 +104,11 @@
 {
   [super viewDidLoad];
   
+  //set title
+  NSString *temp = [solver formula];
+  if ([temp length])
+    self.title = temp;
+  
   //declare self as GV's delegate
   self.graph.delegate = self;
   
@@ -132,6 +137,9 @@
 - (id) init
 {
   if ([super init]) {
+    //set title
+    self.title = DEFAULT_TITLE;
+    
     //initialize variables
     scale = DEFAULT_SCALE;
     dotDraw = 0;

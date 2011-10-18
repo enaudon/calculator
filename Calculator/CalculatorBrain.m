@@ -85,6 +85,16 @@
                                withVariables:vars];
 }
 
+/*Returns a string representation of the expression.
+ *Appends "y =" to the expression.
+ *
+ *@return the string representation
+ */
+- (NSString *) formula
+{
+  return [CalculatorBrain descriptionOfExpression:self.expression];
+}
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*---------------------------{ CLASS METHODS }---------------------------*/

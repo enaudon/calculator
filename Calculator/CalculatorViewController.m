@@ -174,6 +174,16 @@
 /*---------------------------{ OTHER METHODS }---------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+/*Constructor
+ */
+- (id) init
+{
+  if ([super init]) {
+    self.title = @"Calculator";
+  }
+  return self;
+}
+
 /*Destructor.
  */
 - (void) dealloc

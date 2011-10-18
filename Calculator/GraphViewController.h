@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GraphView.h"
 
+#define DEFAULT_TITLE @"Graph"
 #define MINIMUM_SCALE 1
 #define DEFAULT_SCALE 18
 #define MAXIMUM_SCALE 125
@@ -19,6 +20,7 @@
 
 @protocol Solver
   - (double) solveForYWithX:(double)x;
+  - (NSString *) formula;
 
 @end
 
