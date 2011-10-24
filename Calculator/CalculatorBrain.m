@@ -92,7 +92,8 @@
  */
 - (NSString *) formula
 {
-  return [CalculatorBrain descriptionOfExpression:self.expression];
+  return [NSString stringWithFormat:@"y = %@",
+          [CalculatorBrain descriptionOfExpression:self.expression]];
 }
 
 

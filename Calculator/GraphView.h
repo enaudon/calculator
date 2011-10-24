@@ -9,25 +9,30 @@
 #import <UIKit/UIKit.h>
 #import "AxesDrawer.h"
 
+#define MINIMUM_SCALE 1
+#define MAXIMUM_SCALE 333
 
 @class GraphView;
 
 @protocol GraphViewDelegate
   - (CGFloat) yValueForX:(float)x;
-  - (CGFloat) scale;
   - (bool) dotDraw;
 
 @end
 
 
-@interface GraphView : UIView {
+@interface GraphView : UIView <UIGestureRecognizerDelegate> {
 
 @private
   id <GraphViewDelegate> delegate;
   CGPoint origin;
+  CGPoint offset;
+  float scale;
 }
 
 //private property
+@property (assign) float scale;
+@property (assign) float x_offset, y_offset;
 @property (assign) id <GraphViewDelegate> delegate;
 
 @end

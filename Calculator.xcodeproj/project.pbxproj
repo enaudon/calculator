@@ -15,7 +15,7 @@
 		C013FD16142025C3009188DD /* CalculatorAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C013FD15142025C3009188DD /* CalculatorAppDelegate.m */; };
 		C013FD19142025C3009188DD /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C013FD17142025C3009188DD /* MainWindow.xib */; };
 		C013FD1C142025C3009188DD /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C013FD1B142025C3009188DD /* CalculatorViewController.m */; };
-		C013FD1F142025C3009188DD /* CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C013FD1D142025C3009188DD /* CalculatorViewController.xib */; };
+		C013FD1F142025C3009188DD /* CalculatorViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C013FD1D142025C3009188DD /* CalculatorViewController_iPhone.xib */; };
 		C013FD26142025C3009188DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C013FD05142025C3009188DD /* UIKit.framework */; };
 		C013FD27142025C3009188DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C013FD07142025C3009188DD /* Foundation.framework */; };
 		C013FD28142025C3009188DD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C013FD09142025C3009188DD /* CoreGraphics.framework */; };
@@ -26,6 +26,10 @@
 		C099AA291442113A0031F4CD /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = C099AA281442113A0031F4CD /* GraphView.m */; };
 		C099AA511442237E0031F4CD /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C099AA4F1442237E0031F4CD /* GraphViewController.m */; };
 		C099AA521442237E0031F4CD /* GraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C099AA501442237E0031F4CD /* GraphViewController.xib */; };
+		C0D7B7B114545E5D00D1BA33 /* CalculatorAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B7AC14545E5D00D1BA33 /* CalculatorAppDelegate_iPhone.m */; };
+		C0D7B7B214545E5D00D1BA33 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0D7B7AD14545E5D00D1BA33 /* MainWindow_iPhone.xib */; };
+		C0D7B7B314545E5D00D1BA33 /* CalculatorAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B7AF14545E5D00D1BA33 /* CalculatorAppDelegate_iPad.m */; };
+		C0D7B7B414545E5D00D1BA33 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0D7B7B014545E5D00D1BA33 /* MainWindow_iPad.xib */; };
 		C0F56F751444B9E300882E4B /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F56F741444B9E300882E4B /* AxesDrawer.m */; };
 /* End PBXBuildFile section */
 
@@ -53,7 +57,7 @@
 		C013FD18142025C3009188DD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		C013FD1A142025C3009188DD /* CalculatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
 		C013FD1B142025C3009188DD /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
-		C013FD1E142025C3009188DD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CalculatorViewController.xib; sourceTree = "<group>"; };
+		C013FD1E142025C3009188DD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CalculatorViewController_iPhone.xib; sourceTree = "<group>"; };
 		C013FD25142025C3009188DD /* CalculatorTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C013FD2D142025C3009188DD /* CalculatorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CalculatorTests-Info.plist"; sourceTree = "<group>"; };
 		C013FD2F142025C3009188DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -67,6 +71,12 @@
 		C099AA4E1442237E0031F4CD /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
 		C099AA4F1442237E0031F4CD /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		C099AA501442237E0031F4CD /* GraphViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphViewController.xib; sourceTree = "<group>"; };
+		C0D7B7AB14545E5D00D1BA33 /* CalculatorAppDelegate_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorAppDelegate_iPhone.h; sourceTree = "<group>"; };
+		C0D7B7AC14545E5D00D1BA33 /* CalculatorAppDelegate_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorAppDelegate_iPhone.m; sourceTree = "<group>"; };
+		C0D7B7AD14545E5D00D1BA33 /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
+		C0D7B7AE14545E5D00D1BA33 /* CalculatorAppDelegate_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorAppDelegate_iPad.h; sourceTree = "<group>"; };
+		C0D7B7AF14545E5D00D1BA33 /* CalculatorAppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorAppDelegate_iPad.m; sourceTree = "<group>"; };
+		C0D7B7B014545E5D00D1BA33 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
 		C0F56F731444B9E300882E4B /* AxesDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxesDrawer.h; sourceTree = "<group>"; };
 		C0F56F741444B9E300882E4B /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxesDrawer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,7 +142,7 @@
 				C013FD15142025C3009188DD /* CalculatorAppDelegate.m */,
 				C013FD1A142025C3009188DD /* CalculatorViewController.h */,
 				C013FD1B142025C3009188DD /* CalculatorViewController.m */,
-				C013FD1D142025C3009188DD /* CalculatorViewController.xib */,
+				C013FD1D142025C3009188DD /* CalculatorViewController_iPhone.xib */,
 				C013FD3E14202799009188DD /* CalculatorBrain.h */,
 				C013FD3F14202799009188DD /* CalculatorBrain.m */,
 				C099AA4E1442237E0031F4CD /* GraphViewController.h */,
@@ -142,6 +152,8 @@
 				C099AA281442113A0031F4CD /* GraphView.m */,
 				C0F56F731444B9E300882E4B /* AxesDrawer.h */,
 				C0F56F741444B9E300882E4B /* AxesDrawer.m */,
+				C0D7B7B514545F2D00D1BA33 /* iPhone */,
+				C0D7B7B614545F3800D1BA33 /* iPad */,
 				C013FD0C142025C3009188DD /* Supporting Files */,
 			);
 			path = Calculator;
@@ -176,6 +188,26 @@
 				C013FD31142025C3009188DD /* CalculatorTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C0D7B7B514545F2D00D1BA33 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				C0D7B7AB14545E5D00D1BA33 /* CalculatorAppDelegate_iPhone.h */,
+				C0D7B7AC14545E5D00D1BA33 /* CalculatorAppDelegate_iPhone.m */,
+				C0D7B7AD14545E5D00D1BA33 /* MainWindow_iPhone.xib */,
+			);
+			name = iPhone;
+			sourceTree = "<group>";
+		};
+		C0D7B7B614545F3800D1BA33 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				C0D7B7AE14545E5D00D1BA33 /* CalculatorAppDelegate_iPad.h */,
+				C0D7B7AF14545E5D00D1BA33 /* CalculatorAppDelegate_iPad.m */,
+				C0D7B7B014545E5D00D1BA33 /* MainWindow_iPad.xib */,
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,8 +279,10 @@
 			files = (
 				C013FD10142025C3009188DD /* InfoPlist.strings in Resources */,
 				C013FD19142025C3009188DD /* MainWindow.xib in Resources */,
-				C013FD1F142025C3009188DD /* CalculatorViewController.xib in Resources */,
+				C013FD1F142025C3009188DD /* CalculatorViewController_iPhone.xib in Resources */,
 				C099AA521442237E0031F4CD /* GraphViewController.xib in Resources */,
+				C0D7B7B214545E5D00D1BA33 /* MainWindow_iPhone.xib in Resources */,
+				C0D7B7B414545E5D00D1BA33 /* MainWindow_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +325,8 @@
 				C099AA291442113A0031F4CD /* GraphView.m in Sources */,
 				C099AA511442237E0031F4CD /* GraphViewController.m in Sources */,
 				C0F56F751444B9E300882E4B /* AxesDrawer.m in Sources */,
+				C0D7B7B114545E5D00D1BA33 /* CalculatorAppDelegate_iPhone.m in Sources */,
+				C0D7B7B314545E5D00D1BA33 /* CalculatorAppDelegate_iPad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,12 +365,12 @@
 			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
-		C013FD1D142025C3009188DD /* CalculatorViewController.xib */ = {
+		C013FD1D142025C3009188DD /* CalculatorViewController_iPhone.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				C013FD1E142025C3009188DD /* en */,
 			);
-			name = CalculatorViewController.xib;
+			name = CalculatorViewController_iPhone.xib;
 			sourceTree = "<group>";
 		};
 		C013FD2E142025C3009188DD /* InfoPlist.strings */ = {
@@ -389,7 +425,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Calculator/Calculator-Prefix.pch";
 				INFOPLIST_FILE = "Calculator/Calculator-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -402,7 +440,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Calculator/Calculator-Prefix.pch";
 				INFOPLIST_FILE = "Calculator/Calculator-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

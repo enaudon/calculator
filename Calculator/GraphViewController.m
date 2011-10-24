@@ -11,7 +11,7 @@
 
 @implementation GraphViewController
 
-@synthesize graph, magnifier, drawMethod, solver;
+@synthesize graph, drawMethod, solver;
 @synthesize scale, dotDraw;
 
 
@@ -19,19 +19,33 @@
 /*--------------------------{ PRIVATE METHODS }--------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/*Ask the UI to redraw itself.
- */
-- (void)updateUI
-{
-	[self.graph setNeedsDisplay];
-}
-
 /*Release local objects.
  */
 - (void)releaseOutlets
 {
   [graph release];
   self.solver = nil;
+}
+
+/*Sets up the graph as a gesture recognizer.
+ */
+- (void) setUpGestures
+{
+  //setup graph for pinch gestures
+  UIGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc]
+                                initWithTarget:self.graph
+                                action:@selector(pinch:)];
+  [self.graph addGestureRecognizer:pinch];
+  [pinch setDelegate:self.graph];
+  [pinch release]; 
+  
+  //setup graph for pan gestures
+  UIGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]
+                                initWithTarget:self.graph
+                                action:@selector(pan:)];
+  [self.graph addGestureRecognizer:pan];
+  [pan setDelegate:self.graph];
+  [pan release]; 
 }
 
 
@@ -48,6 +62,41 @@
 - (CGFloat) yValueForX:(float)x
 {
   return [solver solveForYWithX:x];
+}
+
+/*Called when the application is in a split-view controller, and that
+ *split-view controller is about to hide its left-hand view (typically in
+ *response the a rotation).
+ *Adds a button the the toolbar that generates a pop-over containing the
+ *hidden view (in this case the calculator view).
+ *
+ *@param svc            the calling split-view controller
+ *@param viewController the view that is about to be hidden
+ *@param barButton      a button that will generate the pop-over
+ *@param pc             the pop-over controller
+ */
+- (void) splitViewController:(UISplitViewController*)svc
+      willHideViewController:(UIViewController *)viewController
+           withBarButtonItem:(UIBarButtonItem *)barButton
+        forPopoverController:(UIPopoverController *)pc
+{
+}
+
+/*Called when the application is in a split-view controller, and that
+ *split-view controller is about to reveal its left-hand view (typically
+ *in response the a rotation).
+ *Removes the toolbar button that was added by the above method because
+ *it (the button) is now useless since the view is visible.
+ *
+ *@param svc            the calling split-view controller
+ *@param viewController the view that is about to be revealed
+ *@param barButton      the now-useless button
+ */
+- (void) splitViewController:(UISplitViewController*)svc
+      willShowViewController:(UIViewController *)aViewController
+   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+  
 }
 
 
@@ -81,6 +130,13 @@
   [self updateUI];
 }
 
+/*Ask the UI to redraw itself.
+ */
+- (void)updateUI
+{
+	[self.graph setNeedsDisplay];
+}
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*---------------------------{ OTHER METHODS }---------------------------*/
@@ -100,7 +156,7 @@
  *Declare self as the graph's delgate, set min and max scale values, and
  *redraw the UI.
  */
-- (void)viewDidLoad
+- (void) viewDidLoad
 {
   [super viewDidLoad];
   
@@ -109,13 +165,12 @@
   if ([temp length])
     self.title = temp;
   
-  //declare self as GV's delegate
+  //declare self as GV's delegate and setup GV gestures
   self.graph.delegate = self;
-  
-  //set min and max scale values
-  self.magnifier.minimumValue = MINIMUM_SCALE;
-  self.magnifier.maximumValue = MAXIMUM_SCALE;
-  self.magnifier.value        = DEFAULT_SCALE;
+  self.graph.scale = DEFAULT_SCALE;
+  self.graph.x_offset = 0;
+  self.graph.y_offset = 0;
+  [self setUpGestures];
   
   self.drawMethod.on = false;
   
@@ -126,10 +181,26 @@
 /*Called after the GVC (self) unloads.
  *Relinquish memory resources.
  */
-- (void)viewDidUnload
+- (void) viewDidUnload
 {
 	[self releaseOutlets];  //release subviews
   [super viewDidUnload];
+}
+
+/*Tells the caller that the GVC (self) can rototate.
+ *
+ *@return true
+ */
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+  return YES;
+}
+
+/*Called after the GVC (self) rotates.
+ *Asks the graph to redraw itself.
+ */
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)oldOrientation
+{
+  [self updateUI];
 }
 
 /*Constructor.

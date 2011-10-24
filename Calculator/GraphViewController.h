@@ -10,10 +10,7 @@
 #import "GraphView.h"
 
 #define DEFAULT_TITLE @"Graph"
-#define MINIMUM_SCALE 1
 #define DEFAULT_SCALE 18
-#define MAXIMUM_SCALE 125
-#define DEFAULT_DRAW_METHOD 
 
 
 @class GraphViewController;
@@ -25,11 +22,11 @@
 @end
 
 
-@interface GraphViewController : UIViewController <GraphViewDelegate> {
+@interface GraphViewController : UIViewController <GraphViewDelegate,
+UISplitViewControllerDelegate> {
 
 @private
 	IBOutlet GraphView *graph;
-  IBOutlet UISlider *magnifier;
   IBOutlet UISwitch *drawMethod;
   id <Solver> solver;
 @public
@@ -38,7 +35,6 @@
 
 //private properties
 @property (retain) IBOutlet GraphView *graph;
-@property (readonly) IBOutlet UISlider *magnifier;
 @property (readonly) IBOutlet UISwitch *drawMethod;
 @property (retain) id <Solver> solver;
 
@@ -60,6 +56,9 @@
 
 //called when the drawing method is changed.  redraws graph.
 - (IBAction) drawMethodSwitched:(UISwitch *)sender;
+
+//ask for graph redraw
+- (void)updateUI;
 
 
 @end

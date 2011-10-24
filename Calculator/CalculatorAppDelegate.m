@@ -10,23 +10,46 @@
 
 @implementation CalculatorAppDelegate
 
-
 @synthesize window=_window;
 
 @synthesize viewController=_viewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  //create nav controller and other view controllers
-  UINavigationController *nc = [[UINavigationController alloc] init];
-  CalculatorViewController *cvc = [[CalculatorViewController alloc] init];
+  //declare calculator view controller
+  CalculatorViewController *cvc;
   
-  //add calc view controller to nav controller and release
-  [nc pushViewController:cvc animated:0];
-  [cvc release];
+  if (iPad)
+  {
+    //create spit-view controller and other controllers
+    UISplitViewController *svc = [[UISplitViewController alloc] init];
+    GraphViewController *gvc = [[GraphViewController alloc] init];
+    cvc = [[CalculatorViewController alloc] initWithGraph:gvc];
+    
+    //add view controllers to the split-view controller and release
+    svc.viewControllers = [NSArray arrayWithObjects:cvc, gvc, nil];
+    svc.delegate = gvc;
+    [cvc release]; [gvc release];
+    
+    //add split-view controller to window
+    [self.window addSubview:svc.view];
+  }
   
-  //add and display nav controller
-  [self.window addSubview:nc.view];
+  else {
+    //create navigation controller and other view controllers
+    UINavigationController *nc = [[UINavigationController alloc] init];
+    cvc = [[CalculatorViewController
+                                      alloc] init];
+  
+    //add calc view controller to navigation controller and release
+    [nc pushViewController:cvc animated:0];
+    [cvc release];
+    
+    //add navigation controller to window
+    [self.window addSubview:nc.view];
+  }
+  
+  //display window and return
   [self.window makeKeyAndVisible];
   return YES;
 }
@@ -70,6 +93,28 @@
      */
 }
 
+/*Getter for the iPad property.
+ *Checks if the application is running on an iPad.  Returns true if so,
+ *false otherwise.  Note that we do not check for other devices.
+ *
+ *@return true if the application is running on an iPad
+ */
+- (bool) iPad {
+  return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+}
+
+/*Constructor.
+ */
+- (id) init
+{
+  if ([super init]) {
+    iPad = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+  }
+  return self;
+}
+
+ /*Destructor.
+ */
 - (void)dealloc
 {
     [_window release];

@@ -103,7 +103,13 @@
  */
 - (IBAction) graphPressed
 {
-  [self.navigationController pushViewController:self.graph animated:1];
+  //if the CVC (self) is in a navigation controller, push the graph
+  if (self.navigationController)
+    [self.navigationController pushViewController:self.graph animated:1];
+  
+  //otherwise, just redraw the graph
+  else [self.graph updateUI];
+  
 }
 
 
@@ -174,12 +180,31 @@
 /*---------------------------{ OTHER METHODS }---------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+/*Tells the caller that the GVC (self) can rototate.
+ *
+ *@return true
+ */
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+  return YES;
+}
+
 /*Constructor
  */
 - (id) init
 {
   if ([super init]) {
     self.title = @"Calculator";
+  }
+  return self;
+}
+
+/*Constructor
+  */
+- (id) initWithGraph:(GraphViewController *)gvc
+{
+  if ([super init]) {
+    self.graph = gvc;
+    graph.solver = self.brain;
   }
   return self;
 }

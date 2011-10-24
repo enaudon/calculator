@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "CalculatorViewController.h"
+#import "GraphViewController.h"
 
 @class CalculatorViewController;
 
 @interface CalculatorAppDelegate : NSObject <UIApplicationDelegate> {
 
+@private
+  bool iPad;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
