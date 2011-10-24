@@ -99,7 +99,10 @@ regard to the display and its associated property, in addition to errors in
 several methods that required iterating through the expressions elements in
 v3.0's source code.  Also, EJ was showed me how to add a titles to my
 navigation bar.
-     Thanks to Hartley Brodey for showing me how to change the background color of my UIButtons.
+     Also, thanks to Hartley Brodey for showing me how to change the background color of my UIButtons; thanks to Nick E for suggestions with regard to the
+implementation of universaltiy; and thanks to for his suggestion on how to
+prevent gesture based zooming from freaking out when the simulator's virtual
+fingers align perfectl during pinch gestures.
 
 CONTACT INFORMATION
 Enrique S. Naudon
