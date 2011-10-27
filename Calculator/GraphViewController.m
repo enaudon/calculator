@@ -12,7 +12,7 @@
 @implementation GraphViewController
 
 @synthesize graph, drawMethod, solver;
-@synthesize scale, dotDraw;
+@synthesize dotDraw;
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -27,25 +27,44 @@
   self.solver = nil;
 }
 
+/*Adds the specified gesture recognizer to the graph view.
+ *
+ *@param recognizer the recognizer to be added to the graph
+ */
+- (void) addRecognizerToGraph:(UIGestureRecognizer *)recognizer
+{
+  [self.graph addGestureRecognizer:recognizer];
+  [recognizer setDelegate:self.graph];
+}
+
 /*Sets up the graph as a gesture recognizer.
  */
 - (void) setUpGestures
 {
+  //general gesture recognizer
+  UIGestureRecognizer *recognizer;
+  
   //setup graph for pinch gestures
-  UIGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc]
-                                initWithTarget:self.graph
-                                action:@selector(pinch:)];
-  [self.graph addGestureRecognizer:pinch];
-  [pinch setDelegate:self.graph];
-  [pinch release]; 
+  recognizer = [[UIPinchGestureRecognizer alloc]
+                initWithTarget:self.graph
+                        action:@selector(pinch:)];
+  [self addRecognizerToGraph:recognizer];
   
   //setup graph for pan gestures
-  UIGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]
-                                initWithTarget:self.graph
-                                action:@selector(pan:)];
-  [self.graph addGestureRecognizer:pan];
-  [pan setDelegate:self.graph];
-  [pan release]; 
+  recognizer = [[UIPanGestureRecognizer alloc]
+                initWithTarget:self.graph
+                action:@selector(pan:)];
+  [self addRecognizerToGraph:recognizer];
+  
+  //setup graph for tap gestures
+  recognizer = [[UITapGestureRecognizer alloc]
+                initWithTarget:self.graph
+                        action:@selector(tap:)];
+  [(UITapGestureRecognizer *)recognizer setNumberOfTapsRequired:2];
+  [self addRecognizerToGraph:recognizer];
+  
+  //release our general purpose recognizer
+  [recognizer release];
 }
 
 
@@ -104,19 +123,6 @@
 /*-------------------------{ INSTANCE  METHODS }-------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/*Called when the magnifcation slider is changed.
- *Stores the new scale value and asks the graph to redraw.
- *
- *@param sender the triggering slider
- */
-- (IBAction) mangificationChanged:(UISlider *)sender;
-{
-  //update scale
-  scale = [sender value];
-  
-  //redraw graph
-  [self updateUI];
-}
 
 /*Called when the drawing method switch is flipped.
  *Records the state of the switch and asks the graph to redraw.
@@ -153,8 +159,7 @@
 }
 
 /*Called after the GVC (self) load.
- *Declare self as the graph's delgate, set min and max scale values, and
- *redraw the UI.
+ *Declare self as the graph's delgate and redraw the UI.
  */
 - (void) viewDidLoad
 {
@@ -167,9 +172,6 @@
   
   //declare self as GV's delegate and setup GV gestures
   self.graph.delegate = self;
-  self.graph.scale = DEFAULT_SCALE;
-  self.graph.x_offset = 0;
-  self.graph.y_offset = 0;
   [self setUpGestures];
   
   self.drawMethod.on = false;
@@ -212,7 +214,6 @@
     self.title = DEFAULT_TITLE;
     
     //initialize variables
-    scale = DEFAULT_SCALE;
     dotDraw = 0;
   }
   return self;

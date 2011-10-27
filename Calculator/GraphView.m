@@ -26,15 +26,17 @@
   if      (scale < MINIMUM_SCALE) scale = MINIMUM_SCALE;
   else if (scale > MAXIMUM_SCALE) scale = MAXIMUM_SCALE;
   
-  pinch.scale = 1;  //reset the gesture's scale
+  //reset the gesture's scale
+  pinch.scale = 1;
   
-  [self setNeedsDisplay]; //refresh display
+  //refresh display
+  [self setNeedsDisplay];
 }
 
-/*Handles pinch gestures.
- *Zooms by changing the graph's scale.
+/*Handles pan gestures.
+ *"Moves" the view to another portion of the graph by changing the origin.
  *
- *@param pinch the gesture object
+ *@param pan the gesture object
  */
 - (void) pan:(UIPanGestureRecognizer *)pan
 {
@@ -55,6 +57,21 @@
     //refresh display
     [self setNeedsDisplay];
   }
+}
+
+/*Handles tap gestures.
+ *Zooms by changing the graph's scale.
+ *
+ *@param tap the gesture object
+ */
+- (void) tap:(UITapGestureRecognizer *)tap
+{
+  //reset scale and offset
+  scale = DEFAULT_SCALE;
+  offset = CGPointZero;
+  
+  //refresh display
+  [self setNeedsDisplay];
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -128,6 +145,15 @@
 	UIGraphicsPopContext();
 }
 
+/*Sets instance variables to their default values.
+ */
+- (void) setDefaults
+{
+  //initialize scale and offset
+  scale = DEFAULT_SCALE;
+  offset = CGPointZero;
+}
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*---------------------------{ OTHER METHODS }---------------------------*/
@@ -156,19 +182,28 @@
 }
 
 /*Constructor.
+ *This particular constructor must be overridden instead of
+ *initWithFrame:, because the graph view is loaded from the a xib file.
+ */
+- (id)initWithCoder:(NSCoder *)decoder
+{
+  if ([super initWithCoder:decoder])
+  {
+    [self setDefaults];
+  }
+  return self;
+}
+
+/*Constructor.
+ *For the sake of reusability--and just to be safe--, this constructor is
+ *overriden too.  (Now even if the code is changed such that the graph is
+ *view is not loaded from a xib file, it *should* still initialize
+ *properly.
  */
 - (id) init {
   if ([super init])
   {
-    
-  }
-  return self;
-}
-- (id) initWithFrame:(CGRect)frame
-{
-  if ([super initWithFrame:frame])
-  {
-    
+    [self setDefaults];
   }
   return self;
 }

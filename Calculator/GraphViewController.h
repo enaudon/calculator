@@ -10,7 +10,6 @@
 #import "GraphView.h"
 
 #define DEFAULT_TITLE @"Graph"
-#define DEFAULT_SCALE 18
 
 
 @class GraphViewController;
@@ -29,8 +28,6 @@ UISplitViewControllerDelegate> {
 	IBOutlet GraphView *graph;
   IBOutlet UISwitch *drawMethod;
   id <Solver> solver;
-@public
-  CGFloat scale;
 }
 
 //private properties
@@ -39,7 +36,6 @@ UISplitViewControllerDelegate> {
 @property (retain) id <Solver> solver;
 
 //public properties
-@property (readonly) CGFloat scale;
 @property (readonly) bool dotDraw;
 
 
@@ -47,13 +43,7 @@ UISplitViewControllerDelegate> {
 //returns y-value for given x-value
 - (CGFloat) yValueForX:(float)x;
 
-//getter for the scale parameter
-- (CGFloat) scale;
-
 /*-------------------------{ INSTANCE  METHODS }-------------------------*/
-//called when magnification is changed.  redraws graph.
-- (IBAction) mangificationChanged:(UISlider *)sender;
-
 //called when the drawing method is changed.  redraws graph.
 - (IBAction) drawMethodSwitched:(UISwitch *)sender;
 

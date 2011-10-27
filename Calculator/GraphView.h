@@ -10,6 +10,7 @@
 #import "AxesDrawer.h"
 
 #define MINIMUM_SCALE 1
+#define DEFAULT_SCALE 18
 #define MAXIMUM_SCALE 333
 
 @class GraphView;
