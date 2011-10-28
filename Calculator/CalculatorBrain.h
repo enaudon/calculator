@@ -36,6 +36,9 @@
 //returns the y-value for given x-value
 - (double) solveForYWithX:(double)x;
 
+//returns a string representation of the expression
+- (NSString *) formula;
+
 /*---------------------------{ CLASS METHODS }---------------------------*/
 //returns the result of the specified expression
 + (double) evaluateExpression:(id)expression

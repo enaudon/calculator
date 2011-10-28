@@ -33,7 +33,6 @@
 
 //private property
 @property (assign) float scale;
-@property (assign) float x_offset, y_offset;
 @property (assign) id <GraphViewDelegate> delegate;
 
 @end

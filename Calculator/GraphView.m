@@ -11,68 +11,8 @@
 
 @implementation GraphView
 
-@synthesize x_offset, y_offset, scale, delegate;
+@synthesize scale, delegate;
 
-/*Handles pinch gestures.
- *Zooms by changing the graph's scale.
- *
- *@param pinch the gesture object
- */
-- (void) pinch:(UIPinchGestureRecognizer *)pinch
-{
-  scale *= pinch.scale;  //update scale
-  
-  //enforce min/max scale constraints
-  if      (scale < MINIMUM_SCALE) scale = MINIMUM_SCALE;
-  else if (scale > MAXIMUM_SCALE) scale = MAXIMUM_SCALE;
-  
-  //reset the gesture's scale
-  pinch.scale = 1;
-  
-  //refresh display
-  [self setNeedsDisplay];
-}
-
-/*Handles pan gestures.
- *"Moves" the view to another portion of the graph by changing the origin.
- *
- *@param pan the gesture object
- */
-- (void) pan:(UIPanGestureRecognizer *)pan
-{
-  if (pan.state == UIGestureRecognizerStateChanged ||
-      pan.state == UIGestureRecognizerStateEnded)
-  {
-    //grab offsets
-    CGPoint translation = [pan translationInView:self];
-    
-    //adjust graph offset
-    offset.x += translation.x;
-    offset.y += translation.y;
-    
-    //reset the gesture's offsets
-    [pan setTranslation:CGPointZero
-                 inView:self];
-    
-    //refresh display
-    [self setNeedsDisplay];
-  }
-}
-
-/*Handles tap gestures.
- *Zooms by changing the graph's scale.
- *
- *@param tap the gesture object
- */
-- (void) tap:(UITapGestureRecognizer *)tap
-{
-  //reset scale and offset
-  scale = DEFAULT_SCALE;
-  offset = CGPointZero;
-  
-  //refresh display
-  [self setNeedsDisplay];
-}
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*--------------------------{ PRIVATE METHODS }--------------------------*/
@@ -152,6 +92,72 @@
   //initialize scale and offset
   scale = DEFAULT_SCALE;
   offset = CGPointZero;
+}
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*--------------------------{ GESTURE METHODS }--------------------------*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/*Handles pinch gestures.
+ *Zooms by changing the graph's scale.
+ *
+ *@param pinch the gesture object
+ */
+- (void) pinch:(UIPinchGestureRecognizer *)pinch
+{
+  scale *= pinch.scale;  //update scale
+  
+  //enforce min/max scale constraints
+  if      (scale < MINIMUM_SCALE) scale = MINIMUM_SCALE;
+  else if (scale > MAXIMUM_SCALE) scale = MAXIMUM_SCALE;
+  
+  //reset the gesture's scale
+  pinch.scale = 1;
+  
+  //refresh display
+  [self setNeedsDisplay];
+}
+
+/*Handles pan gestures.
+ *"Moves" the view to another portion of the graph by changing the origin.
+ *
+ *@param pan the gesture object
+ */
+- (void) pan:(UIPanGestureRecognizer *)pan
+{
+  if (pan.state == UIGestureRecognizerStateChanged ||
+      pan.state == UIGestureRecognizerStateEnded)
+  {
+    //grab offsets
+    CGPoint translation = [pan translationInView:self];
+    
+    //adjust graph offset
+    offset.x += translation.x;
+    offset.y += translation.y;
+    
+    //reset the gesture's offsets
+    [pan setTranslation:CGPointZero
+                 inView:self];
+    
+    //refresh display
+    [self setNeedsDisplay];
+  }
+}
+
+/*Handles tap gestures.
+ *Zooms by changing the graph's scale.
+ *
+ *@param tap the gesture object
+ */
+- (void) tap:(UITapGestureRecognizer *)tap
+{
+  //reset scale and offset
+  scale = DEFAULT_SCALE;
+  offset = CGPointZero;
+  
+  //refresh display
+  [self setNeedsDisplay];
 }
 
 

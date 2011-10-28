@@ -180,9 +180,11 @@
 /*---------------------------{ OTHER METHODS }---------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/*Tells the caller that the CVC (self) can rototate.
+/*Tells the caller whether or not the CVC (self) can rototate.
+ *Only returns true when the CVC is not in a navigation controller (ie.
+ *the application is running in an ipad).
  *
- *@return true
+ *@return true if the application is running in an ipad
  */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
   return !self.navigationController;
