@@ -212,17 +212,6 @@
   return self;
 }
 
-/*Constructor
-  */
-- (id) initWithGraph:(GraphViewController *)gvc
-{
-  if ([super init]) {
-    self.graph = gvc;
-    graph.solver = self.brain;
-  }
-  return self;
-}
-
 /*Destructor.
  */
 - (void) dealloc

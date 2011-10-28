@@ -24,8 +24,8 @@
   {
     //create spit-view controller and other controllers
     UISplitViewController *svc = [[UISplitViewController alloc] init];
-    GraphViewController *gvc = [[GraphViewController alloc] init];
-    cvc = [[CalculatorViewController alloc] initWithGraph:gvc];
+    cvc = [[CalculatorViewController alloc] init];
+    GraphViewController *gvc = cvc.graph;
     
     //add graph view to navigation controller
     [nc pushViewController:gvc animated:0];

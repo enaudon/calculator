@@ -170,11 +170,11 @@
     //reset the gesture's offsets
     [pan setTranslation:CGPointZero
                  inView:self];
-    
-    //refresh display and save changes
-    [self setNeedsDisplay];
-    [self writeDefaults];
   }
+  
+  //refresh display and save changes
+  [self setNeedsDisplay];
+  [self writeDefaults];
 }
 
 /*Handles tap gestures.

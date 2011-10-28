@@ -65,8 +65,4 @@
 - (GraphViewController *) graph;
 
 
-/*---------------------------{ OTHER METHODS }---------------------------*/
-//convenience initializer that sets graph property.
-- (id) initWithGraph:(GraphViewController *)gvc;
-
 @end
