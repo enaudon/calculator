@@ -26,7 +26,7 @@
 
 //private properties
 @property (retain, nonatomic) CalculatorBrain  *brain;
-@property (retain, nonatomic) GraphViewController  *graph;
+@property (retain, readonly)  GraphViewController  *graph;
 @property (copy)              NSString *displayText;    //display's text
 @property (readonly)          UIButton *eval;
 @property (nonatomic)         BOOL expr;
