@@ -85,13 +85,43 @@
 	UIGraphicsPopContext();
 }
 
+/*Saves instance variables to NSUserDefaults.
+ */
+- (void) writeDefaults
+{
+  //grab user defaults object
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
+  //save defaults
+  [defaults setFloat:scale
+              forKey:SCALE_KEY];
+  [defaults setFloat:offset.x
+              forKey:X_ORIGIN_KEY];
+  [defaults setFloat:offset.y
+              forKey:Y_ORIGIN_KEY];
+}
+
+
 /*Sets instance variables to their default values.
  */
-- (void) setDefaults
+- (void) readDefaults
 {
-  //initialize scale and offset
-  scale = DEFAULT_SCALE;
-  offset = CGPointZero;
+  //grab user defaults object
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
+  //load defaults if there are any
+  if (defaults) {
+    scale = [defaults floatForKey:SCALE_KEY];
+    offset.x = [defaults floatForKey:X_ORIGIN_KEY];
+    offset.y = [defaults floatForKey:Y_ORIGIN_KEY];
+  }
+  //otherwise use hardcoded defaults
+  else {
+    offset = CGPointZero;
+  }
+  
+  //make sure scale is not zero
+  if (!scale)  scale = DEFAULT_SCALE;
 }
 
 
@@ -115,8 +145,9 @@
   //reset the gesture's scale
   pinch.scale = 1;
   
-  //refresh display
+  //refresh display and save changes
   [self setNeedsDisplay];
+  [self writeDefaults];
 }
 
 /*Handles pan gestures.
@@ -140,8 +171,9 @@
     [pan setTranslation:CGPointZero
                  inView:self];
     
-    //refresh display
+    //refresh display and save changes
     [self setNeedsDisplay];
+    [self writeDefaults];
   }
 }
 
@@ -156,8 +188,9 @@
   scale = DEFAULT_SCALE;
   offset = CGPointZero;
   
-  //refresh display
+  //refresh display and save changes
   [self setNeedsDisplay];
+  [self writeDefaults];
 }
 
 
@@ -195,7 +228,7 @@
 {
   if ([super initWithCoder:decoder])
   {
-    [self setDefaults];
+    [self readDefaults];
   }
   return self;
 }
@@ -209,7 +242,7 @@
 - (id) init {
   if ([super init])
   {
-    [self setDefaults];
+    [self readDefaults];
   }
   return self;
 }

@@ -100,7 +100,7 @@
 {
   //display the popover button
   barButton.title = @"Calculator";
-  self.navigationItem.rightBarButtonItem = barButton;
+  self.navigationItem.leftBarButtonItem = barButton;
   
   //resize the popover controller
   CGSize temp;
@@ -125,7 +125,7 @@
    invalidatingBarButtonItem:(UIBarButtonItem *)barButton
 {
   //remove the popover button
-  self.navigationItem.rightBarButtonItem = nil;
+  self.navigationItem.leftBarButtonItem = nil;
 }
 
 
@@ -196,9 +196,9 @@
   [dotDraw addTarget:self
               action:@selector(drawModeChanged)
     forControlEvents:UIControlEventValueChanged];
-  self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
-                                            initWithCustomView: dotDraw]
-                                           autorelease];
+  self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
+                                             initWithCustomView: dotDraw]
+                                            autorelease];
   dotDraw.on = false;
   
   //redraw

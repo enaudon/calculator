@@ -12,6 +12,9 @@
 #define MINIMUM_SCALE 1
 #define DEFAULT_SCALE 18
 #define MAXIMUM_SCALE 333
+#define SCALE_KEY     @"scale"
+#define X_ORIGIN_KEY  @"origin_x"
+#define Y_ORIGIN_KEY  @"origin_y"
 
 @class GraphView;
 
