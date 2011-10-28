@@ -22,13 +22,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "Calculator/GraphView.m"
-         timestampString = "341460101.653408"
+         filePath = "Calculator/GraphViewController.m"
+         timestampString = "341464198.461884"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "100"
-         endingLineNumber = "100"
-         landmarkName = "-drawCurveInContext:"
+         startingLineNumber = "109"
+         endingLineNumber = "109"
+         landmarkName = "-splitViewController:willHideViewController:withBarButtonItem:forPopoverController:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -98,8 +98,16 @@
            withBarButtonItem:(UIBarButtonItem *)barButton
         forPopoverController:(UIPopoverController *)pc
 {
+  //display the popover button
   barButton.title = @"Calculator";
   self.navigationItem.rightBarButtonItem = barButton;
+  
+  //resize the popover controller
+  CGSize temp;
+  temp.width = 400;
+  temp.height = 400;
+  [pc setPopoverContentSize:viewController.contentSizeForViewInPopover
+                   animated:0];
 }
 
 /*Called when the application is in a split-view controller, and that
@@ -116,6 +124,7 @@
       willShowViewController:(UIViewController *)aViewController
    invalidatingBarButtonItem:(UIBarButtonItem *)barButton
 {
+  //remove the popover button
   self.navigationItem.rightBarButtonItem = nil;
 }
 

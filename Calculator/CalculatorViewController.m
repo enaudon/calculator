@@ -180,12 +180,24 @@
 /*---------------------------{ OTHER METHODS }---------------------------*/
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/*Tells the caller that the GVC (self) can rototate.
+/*Tells the caller that the CVC (self) can rototate.
  *
  *@return true
  */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-  return YES;
+  return !self.navigationController;
+}
+
+/*Returns the size that the CVC (self) wants for popovers.
+ *
+ *@return a hardcoded size (there are better ways, but not at 1:13am.)
+ */
+- (CGSize) contentSizeForViewInPopover
+{
+  CGSize ret;
+  ret.width = 320;
+  ret.height = 415;
+  return ret;
 }
 
 /*Constructor
