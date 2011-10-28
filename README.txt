@@ -8,11 +8,11 @@
 
 GENERAL INFORMATION
 * Program Name : Calculator
-* Version      : v4.0
+* Version      : v5.0
 * Institution  : Bowdoin College
 * Developer    : Enrique S. Naudon
 * Date Created : 09/13/11
-* Last Updated : 10/17/11
+* Last Updated : 10/28/11
 
 DESCRIPTION
      This is an Objective-C calculator app written for the 3rd generation
@@ -30,11 +30,29 @@ FEATURES
 - Expression building and evaluation functionality
 - Support for variables in expressions
 - 2D graphing capabilities
+- Rudimentary user default storage capabilities
+- Support for gestures (see below)
+- iPhone and iPad support
+
+GESTURES
+- Pinch to change graph scale
+- Drag to pan graph
+- Double-tap to snap back to origin
 
 KNOWN BUGS/ISSUES
 - During expression-building, when a digit is pressed, it is shown alone on the
   display until the next operation is pressed.
 - Graph title remains previous expression even after clear button is pressed.
+- When dragging the graph, the axes numbers completely disappear when their
+  axis itself goes off the side of the screen.
+- When zooming, the origin always remains stationary.
+
+USER-DEFAULT-SAVING JUSTIFICATION
+     I put the user default loading/saving methods in my GraphView as opposed
+to any other class for for the simple reason that I handle my scale and offset
+(i.e. origin position) variables in the GraphView.  Therefore, by keeping the
+user default load/save methods in the same class, I avoid a lot of unnecessary
+complexity.
 
 VERSION HISTORY
 v1.0 - Five function (+, -, *, / and sqrt) calculator.  Only supported integer
@@ -92,17 +110,34 @@ v3.9 - Added dot-drawing functionality and a switch to switch between dot-draw
        and line-draw modes.
 v4.0 - Reworked the GUI, added titles to navigation bars and updated
        documentation.
+v4.1 - Implemented iPad support.  Also implemented panning and zooming
+       gestures.
+v4.2 - Added tap handling for double-tap gestures.
+v4.3 - Added popover view support for the "iPad half" of the application.  Also
+       moved the drawing mode switch onto the navigation bar.
+v4.4 - Scaled popover to more "snuggly" fit the Calculator View.
+v4.5 - Added user defaults saving functionality.
+v4.6 - Minor changes to implementation and code organization.
+v4.7 - Updated documentation.
+
+v5.0 - FINAL VERSION :-(.
 
 ACKNOWLEDGEMENTS
-     Thanks to EJ Googins for pointing out encapsulation and access issues with
-regard to the display and its associated property, in addition to errors in
-several methods that required iterating through the expressions elements in
-v3.0's source code.  Also, EJ was showed me how to add a titles to my
-navigation bar.
-     Also, thanks to Hartley Brodey for showing me how to change the background color of my UIButtons; thanks to Nick E for suggestions with regard to the
-implementation of universaltiy; and thanks to for his suggestion on how to
+     Thanks to Hartley Brodey for showing me how to change the background color
+of my UIButtons; thanks to Nick Edises for suggestions with regard to the
+implementation of universaltiy; thanks to for his suggestion on how to
 prevent gesture based zooming from freaking out when the simulator's virtual
-fingers align perfectl during pinch gestures.
+fingers align perfectl during pinch gestures; and thanks to Alex Takata for
+help with my implementation of the default-saving functionality.
+     Thanks to EJ Googins for help on a number of topics throughout the course
+of the development of this app.  Such help included pointing out encapsulation
+and access issues with regard to the display and its associated property, in
+addition to errors in several methods that required iterating through the
+expressions elements in v3.0's source code.  Also, EJ was showed me how to add
+a titles to my navigation bar.
+     Finally, thanks to Professor Chown for all those "early" mornings in
+Searles (both with and without power), for his ever-open office door (and that
+automatic light).
 
 CONTACT INFORMATION
 Enrique S. Naudon
@@ -115,4 +150,5 @@ enaudon@bowdoin.edu
 README's README
 * Author  : Enrique S. Naudon
 * Created : 09/19/11
-* Updated : 10/17/11
+* Updated : 10/28/11
+

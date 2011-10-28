@@ -103,9 +103,6 @@
   self.navigationItem.leftBarButtonItem = barButton;
   
   //resize the popover controller
-  CGSize temp;
-  temp.width = 400;
-  temp.height = 400;
   [pc setPopoverContentSize:viewController.contentSizeForViewInPopover
                    animated:0];
 }
@@ -197,7 +194,7 @@
               action:@selector(drawModeChanged)
     forControlEvents:UIControlEventValueChanged];
   self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
-                                             initWithCustomView: dotDraw]
+                                             initWithCustomView:dotDraw]
                                             autorelease];
   dotDraw.on = false;
   

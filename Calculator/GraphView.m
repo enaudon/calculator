@@ -224,7 +224,7 @@
  *This particular constructor must be overridden instead of
  *initWithFrame:, because the graph view is loaded from the a xib file.
  */
-- (id)initWithCoder:(NSCoder *)decoder
+- (id) initWithCoder:(NSCoder *)decoder
 {
   if ([super initWithCoder:decoder])
   {
@@ -239,8 +239,8 @@
  *view is not loaded from a xib file, it *should* still initialize
  *properly.
  */
-- (id) init {
-  if ([super init])
+- (id) initWithFrame:(CGRect)frame {
+  if ([super initWithFrame:frame])
   {
     [self readDefaults];
   }

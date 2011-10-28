@@ -4,7 +4,7 @@
  *Institution  : Bowdoin College
  *Developer    : Enrique Naudon
  *Date Created : 09/13/11
- *Last Updated : 10/17/11
+ *Last Updated : 10/28/11
  *Description  : This is an Objective-C calculator app written for the 3rd
  *               generation iPhone's iOS platform.  Upon execution, 
  *               Calculator presents the user with a fairly standard
