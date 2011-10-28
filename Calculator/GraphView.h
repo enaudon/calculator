@@ -17,7 +17,7 @@
 
 @protocol GraphViewDelegate
   - (CGFloat) yValueForX:(float)x;
-  - (bool) dotDraw;
+  - (BOOL) dotDraw;
 
 @end
 

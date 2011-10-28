@@ -18,6 +18,7 @@
 {
   //declare calculator view controller
   CalculatorViewController *cvc;
+  UINavigationController *nc = [[UINavigationController alloc] init];
   
   if (iPad)
   {
@@ -26,10 +27,14 @@
     GraphViewController *gvc = [[GraphViewController alloc] init];
     cvc = [[CalculatorViewController alloc] initWithGraph:gvc];
     
-    //add view controllers to the split-view controller and release
-    svc.viewControllers = [NSArray arrayWithObjects:cvc, gvc, nil];
+    //add graph view to navigation controller
+    [nc pushViewController:gvc animated:0];
     svc.delegate = gvc;
-    [cvc release]; [gvc release];
+    [gvc release];
+    
+    //add view controllers to the split-view controller and release
+    svc.viewControllers = [NSArray arrayWithObjects:cvc, nc, nil];
+    [cvc release]; [nc release];
     
     //add split-view controller to window
     [self.window addSubview:svc.view];
@@ -37,7 +42,6 @@
   
   else {
     //create navigation controller and other view controllers
-    UINavigationController *nc = [[UINavigationController alloc] init];
     cvc = [[CalculatorViewController
                                       alloc] init];
   

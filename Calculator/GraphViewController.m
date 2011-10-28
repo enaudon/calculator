@@ -11,8 +11,7 @@
 
 @implementation GraphViewController
 
-@synthesize graph, drawMethod, solver;
-@synthesize dotDraw;
+@synthesize graph, solver;
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -99,6 +98,8 @@
            withBarButtonItem:(UIBarButtonItem *)barButton
         forPopoverController:(UIPopoverController *)pc
 {
+  barButton.title = @"Calculator";
+  self.navigationItem.rightBarButtonItem = barButton;
 }
 
 /*Called when the application is in a split-view controller, and that
@@ -113,9 +114,9 @@
  */
 - (void) splitViewController:(UISplitViewController*)svc
       willShowViewController:(UIViewController *)aViewController
-   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+   invalidatingBarButtonItem:(UIBarButtonItem *)barButton
 {
-  
+  self.navigationItem.rightBarButtonItem = nil;
 }
 
 
@@ -124,23 +125,35 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-/*Called when the drawing method switch is flipped.
- *Records the state of the switch and asks the graph to redraw.
+/*Ask the UI to redraw itself.
  */
-- (IBAction) drawMethodSwitched:(UISwitch *)sender
+- (void) updateUI
 {
-  //update drawing method
-  dotDraw = sender.on;
-  
-  //redraw graph
+	[self.graph setNeedsDisplay];
+}
+
+/*Called when the drawing mode is changed.
+ *Asks for the graph to be refreshed.
+ *
+ *@param sender the triggering UISwitch.
+ */
+- (void) drawModeChanged
+{
   [self updateUI];
 }
 
-/*Ask the UI to redraw itself.
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*------------------------{ GETTERS AND SETTERS }------------------------*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/*Getter for drawMode property.
+ *
+ *return the value of the display's text
  */
-- (void)updateUI
+- (BOOL) dotDraw
 {
-	[self.graph setNeedsDisplay];
+  return dotDraw.on;
 }
 
 
@@ -165,16 +178,19 @@
 {
   [super viewDidLoad];
   
-  //set title
-  NSString *temp = [solver formula];
-  if ([temp length])
-    self.title = temp;
-  
   //declare self as GV's delegate and setup GV gestures
   self.graph.delegate = self;
   [self setUpGestures];
   
-  self.drawMethod.on = false;
+  //create drawing mode switch
+  dotDraw = [[UISwitch alloc] initWithFrame:CGRectMake(50, 50, 50, 50)];
+  [dotDraw addTarget:self
+              action:@selector(drawModeChanged)
+    forControlEvents:UIControlEventValueChanged];
+  self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
+                                            initWithCustomView: dotDraw]
+                                           autorelease];
+  dotDraw.on = false;
   
   //redraw
   [self updateUI];

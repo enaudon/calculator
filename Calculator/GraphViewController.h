@@ -26,17 +26,13 @@ UISplitViewControllerDelegate> {
 
 @private
 	IBOutlet GraphView *graph;
-  IBOutlet UISwitch *drawMethod;
+  IBOutlet UISwitch *dotDraw;
   id <Solver> solver;
 }
 
 //private properties
 @property (retain) IBOutlet GraphView *graph;
-@property (readonly) IBOutlet UISwitch *drawMethod;
 @property (retain) id <Solver> solver;
-
-//public properties
-@property (readonly) bool dotDraw;
 
 
 /*-------------------------{ PROTOCOL  METHODS }-------------------------*/
@@ -44,9 +40,6 @@ UISplitViewControllerDelegate> {
 - (CGFloat) yValueForX:(float)x;
 
 /*-------------------------{ INSTANCE  METHODS }-------------------------*/
-//called when the drawing method is changed.  redraws graph.
-- (IBAction) drawMethodSwitched:(UISwitch *)sender;
-
 //ask for graph redraw
 - (void)updateUI;
 
